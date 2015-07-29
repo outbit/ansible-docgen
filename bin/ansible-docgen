@@ -1,11 +1,11 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 """ Generate documentation from annotated Ansible source code """
 import yaml
-from ansibledocgen import cli
+from ansibledocgen import Cli
 
 if __name__ == "__main__":
-	CLI = cli()
-    CLI.run()
+	cli = Cli.Cli()
+	cli.run()
 """
     with open("test/integration/basic_playbook.yml") as f:
         data = f.read()
