@@ -1,3 +1,3 @@
-class dirparser(object):
+class PlaybookParser(object):
 	def __init__(self):
 	    pass
