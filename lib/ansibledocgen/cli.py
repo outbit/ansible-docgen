@@ -14,5 +14,5 @@ class Cli(object):
 
 	def run(self):
 		self.dirparser = DirParser(self.options.project)
-		for role in self.dirparser.get_roles():
-			print role
+		# TESTING FOR NOW
+		self.dirparser.debug()
