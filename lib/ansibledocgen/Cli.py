@@ -1,4 +1,5 @@
 import optparse
+from ansibledocgen import DirParser
 
 class Cli(object):
 	def __init__(self):
@@ -12,4 +13,6 @@ class Cli(object):
 	    (self.options, self.args) = parser.parse_args()
 
 	def run(self):
-		pass
+		self.dirparser = DirParser(self.options.project, self.options.dest)
+		for role in self.dirparser.roles:
+			print role
