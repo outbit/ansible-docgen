@@ -1,2 +1,2 @@
 # ansible-docgen
-Generate documentation fro annotated Ansible Playbooks and Roles
+Generate documentation from annotated Ansible Playbooks and Roles
