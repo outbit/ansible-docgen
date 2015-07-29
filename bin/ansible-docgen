@@ -1,0 +1,11 @@
+#!/usr/bin/env python2
+""" Generate documentation from annotated Ansible source code """
+import yaml
+
+if __name__ == "__main__":
+    with open("test/integration/basic_playbook.yml") as f:
+        data = f.read()
+        for task in yaml.load(data):
+            for key in task:
+	        if key == "name":
+	            print(task[key])
