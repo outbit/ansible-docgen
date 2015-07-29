@@ -1,0 +1,2 @@
+class FormatterMarkup(object):
+    pass

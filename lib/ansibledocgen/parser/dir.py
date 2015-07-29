@@ -1,6 +1,6 @@
-from ansibledocgen.ansiblecfg import AnsibleCfg
-from ansibledocgen.playbookparser import PlaybookParser
-from ansibledocgen.roleparser import RoleParser
+from ansibledocgen.parser.ansiblecfg import AnsibleCfg
+from ansibledocgen.parser.playbook import PlaybookParser
+from ansibledocgen.parser.role import RoleParser
 
 class DirParser(object):
 	def __init__(self, project):

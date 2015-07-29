@@ -1,5 +1,5 @@
 import optparse
-from ansibledocgen.dirparser import DirParser
+from ansibledocgen.parser.dir import DirParser
 
 class Cli(object):
 	def __init__(self):

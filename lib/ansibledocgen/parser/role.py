@@ -1,4 +1,4 @@
-from ansibledocgen.playbookparser import PlaybookParser
+from ansibledocgen.parser.playbook import PlaybookParser
 
 class RoleParser(object):
 	def __init__(self, rolepath):
