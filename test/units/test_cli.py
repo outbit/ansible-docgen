@@ -7,4 +7,4 @@ class TestCli(unittest.TestCase):
     def test_help(self):
         sys.argv[1:] = "-h"
         cli = Cli()
-        assert(cli.options is None and cli.args is None)
+        assert(cli.options is not None or cli.args is not None)
