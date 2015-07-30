@@ -1,23 +1,11 @@
+import nose
+from ansibledocgen.cli import Cli
 import unittest
-"""
-python -m unittest test_module1 test_module2
-python -m unittest test_module.TestClass
-python -m unittest test_module.TestClass.test_method """
+import sys
 
-class TestStringMethods(unittest.TestCase):
-    def test_upper(self):
-        self.assertEqual('foo'.upper(), 'FOO')
-
-    def test_isupper(self):
-        self.assertTrue('FOO'.isupper())
-        self.assertFalse('Foo'.isupper())
-
-def test_split(self):
-    s = 'hello world'
-    self.assertEqual(s.split(), ['hello', 'world'])
-    # check that s.split fails when the separator is not a string
-    with self.assertRaises(TypeError):
-        s.split(2)
-
-if __name__ == '__main__':
-    unittest.main()
+class TestCli(unittest.TestCase):
+    def test_help(self):
+        sys.argv = ["--help"]
+        cli = Cli()
+        cli.run()
+        assert(cli.dirparser is None)
