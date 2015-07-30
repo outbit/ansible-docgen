@@ -5,6 +5,6 @@ import sys
 
 class TestCli(unittest.TestCase):
     def test_help(self):
-        sys.argv = ["--help"]
+        sys.argv[0] = "--help"
         cli = Cli()
         assert(cli.options is None)
