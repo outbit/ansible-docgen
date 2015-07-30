@@ -8,4 +8,4 @@ class TestCli(unittest.TestCase):
         sys.argv = ["--help"]
         cli = Cli()
         cli.run()
-        assert(cli.dirparser is None)
+        assert(cli.options is None)
