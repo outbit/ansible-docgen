@@ -6,6 +6,6 @@ python:
   - "3.3"
   - "3.4"
 # command to install dependencies
-install: "pip install nose"
+install: "pip install nose; pip install yaml"
 # command to run tests
 script: 'export PYTHONPATH="${PYTHONPATH}:./lib"; nosetests -w test/units/'
