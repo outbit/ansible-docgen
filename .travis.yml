@@ -1,2 +1,11 @@
 language: python
-script: ./run_tests.sh
+python:
+  - "2.6"
+  - "2.7"
+  - "3.2"
+  - "3.3"
+  - "3.4"
+# command to install dependencies
+install: "pip install nose"
+# command to run tests
+script: nosetests
