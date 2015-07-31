@@ -5,7 +5,7 @@ class AnsibleCfg(object):
     def __init__(self, project):
         # Search for configs in all locations, including path
         # Load Ansible Configs into a dictionary
-	    # ANSIBLE_CONFIG (an environment variable)
+        # ANSIBLE_CONFIG (an environment variable)
         # ansible.cfg (in the current directory)
         # .ansible.cfg (in the home directory)
         # /etc/ansible/ansible.cfg
@@ -26,10 +26,10 @@ class AnsibleCfg(object):
 
         # Loop through configs and stop when one is found
         for config in config_files:
-	        if config is not None:
-	    	    if os.path.isfile(config):
-	    	        self.load_config(config)
-	    	        break
+            if config is not None:
+                if os.path.isfile(config):
+                    self.load_config(config)
+                    break
 
     def load_config(self, filename):
         with open (filename, "r") as f:
