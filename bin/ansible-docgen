@@ -6,11 +6,3 @@ from ansibledocgen.cli import Cli
 if __name__ == "__main__":
 	cli = Cli()
 	cli.run()
-"""
-    with open("test/integration/basic_playbook.yml") as f:
-        data = f.read()
-        for task in yaml.load(data):
-            for key in task:
-	        if key == "name":
-	            print(task[key])
-"""
