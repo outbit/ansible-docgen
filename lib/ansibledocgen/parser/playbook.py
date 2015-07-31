@@ -1,14 +1,17 @@
 import yaml
 
 class PlaybookParser(object):
-    def __init__(self, filename):
-        self.filename = filename
+    def __init__(self, playbooks):
+        self.playbooks = playbooks
         self.comments = {}
         self.tasks = []
 
     def parse_playbooks(self):
-        # TESTING FOR NOW JUST USE FIRST ELEMENT
-        with open(self.filename[0]) as f:
+        for playbook in self.playbooks:
+            self.parse_playbook(playbook)
+
+    def parse_playbook(self, playbook):
+        with open(playbook) as f:
             data = f.read()
             for task in yaml.load(data):
                 for key in task:
