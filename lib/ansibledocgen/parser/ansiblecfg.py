@@ -1,5 +1,6 @@
 import os
 import re
+import fnmatch
 
 class AnsibleCfg(object):
     def __init__(self, project):
@@ -36,18 +37,35 @@ class AnsibleCfg(object):
             self.config = f.read()
 
         for line in self.config:
-            m = re.match(r'^[ ]*(.*?)[ ]*=[ ]*(.*?)$')
+            m = re.match(r'^[ ]*(.*?)[ ]*=[ ]*(.*?)$', line)
             if m:
                 self.settings[m.group(1)] = m.group(2)
 
     def get_role_paths(self):
         if "roles_path" not in self.settings:
-            return ["roles/"]
+            return ["./roles/"]
         else:
             return self.settings["roles_path"]
 
     def get_playbook_paths(self):
         """ Crawl Directory structure excluding role roles_path
         and find all .yml files """
-        # TESTING FOR NOW
-        return ["test/integration/basic_playbook.yml"]
+        playbooks = []
+
+        # Find all .yml files in the project directory
+        for root, dirnames, filenames in os.walk(self.project):
+            for filename in fnmatch.filter(filenames, '*.yml'):
+                # Absolute path to file
+                fullpath = os.path.join(root, filename)
+
+                # Detect if this file is in a role
+                is_rolepath = False
+                for rolepath in self.get_role_paths():
+                    if re.match(r'^\%s' % rolepath, fullpath):
+                        is_rolepath = True
+
+                # Do not search in roles
+                if not is_rolepath:
+                    playbooks.append(fullpath)
+
+        return playbooks
