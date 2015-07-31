@@ -13,6 +13,7 @@ class RoleParser(object):
         self.main_tasks = []
         for role_path in self.role_paths:
             for root, dirnames, filenames in os.walk(role_path):
+                # WHAT OTHER DIRECTORIES SHOULD I LOOK IN??? handlers/main.yml??
                 for filename in fnmatch.filter(filenames, 'tasks/main.yml'):
                     # Absolute path to file
                     fullpath = os.path.join(root, filename)
