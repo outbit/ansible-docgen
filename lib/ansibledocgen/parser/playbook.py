@@ -29,9 +29,18 @@ class PlaybookParser(object):
             # Read file content into data
             data = f.read()
 
-            # TEST
-            playbookentry["author"] = "Test Author"
-            playbookentry["description"] = "Test Description"
+            # Parse Comment Data
+            playbookentry["author"] = ""
+            playbookentry["description"] = ""
+            for line in data.splitlines():
+                m = re.match(r"^[ ]*#[ ]*(.*?)[ ]*:[ ]*(.*?)$", line)
+                if m:
+                    attribute = m.group(1)
+                    value = m.group(2)
+
+                    # Set
+                    if attribute == "author" or attribute == "description":
+                        playbookentry[attribute] = value
 
             # Parse Task Names from playbook
             for task in yaml.load(data):

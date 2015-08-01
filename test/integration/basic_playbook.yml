@@ -1,8 +1,6 @@
 ---
-# Name: Basic Playbook
-# Description: Installs and Configured Apache
-# and makes sure it starts on reboot
-# Author: David Whiteside
+# description: Installs and Configured Apache
+# author: David Whiteside
 
 - name: Install apache
   yum: name=apache2 state=installed
