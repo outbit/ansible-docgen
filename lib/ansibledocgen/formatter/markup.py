@@ -60,6 +60,7 @@ class FormatterMarkup(object):
             with open(filename, "w") as p:
                 for line in self.role_outfiles[rolepath]:
                     p.write("%s\n" % line)
+            print("Generated Markup File %s" % filename)
 
         # Write Playbook Markup Files
         for playbookpath in self.playbook_outfiles:
@@ -67,3 +68,4 @@ class FormatterMarkup(object):
             with open(filename, "w") as p:
                 for line in self.playbook_outfiles[playbookpath]:
                     p.write("%s\n" % line)
+            print("Generated Markup File %s" % filename)
