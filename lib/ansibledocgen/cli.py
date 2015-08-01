@@ -1,5 +1,6 @@
 import optparse
 from ansibledocgen.parser.dir import DirParser
+from ansibledocgen.formatter.markup import FormatterMarkup
 
 class Cli(object):
     def __init__(self):
@@ -14,5 +15,4 @@ class Cli(object):
 
     def run(self):
         self.dirparser = DirParser(self.options.project)
-        # TESTING FOR NOW
-        self.dirparser.debug()
+        self.formatter = FormatterMarkup(self.dirparser.get_parserdata())

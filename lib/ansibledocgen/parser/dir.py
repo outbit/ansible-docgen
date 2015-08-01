@@ -11,5 +11,5 @@ class DirParser(object):
         # Parse all playbooks
         self.playbookparser.parse_playbooks()
 
-    def debug(self):
-        self.playbookparser.debug()
+    def get_parserdata(self):
+        return self.playbookparser.parserdata + self.roleparser.parserdata

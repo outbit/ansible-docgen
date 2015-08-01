@@ -43,9 +43,9 @@ class AnsibleCfg(object):
 
     def get_role_paths(self):
         if "roles_path" not in self.settings:
-            return ["./roles/"]
+            return ["%s%s" % (self.project, "roles/")]
         else:
-            return self.settings["roles_path"]
+            return ["%s%s" % (self.project, self.settings["roles_path"])]
 
     def get_playbook_paths(self):
         """ Crawl Directory structure excluding role roles_path
@@ -61,7 +61,7 @@ class AnsibleCfg(object):
                 # Detect if this file is in a role
                 is_rolepath = False
                 for rolepath in self.get_role_paths():
-                    if re.match(r'^\%s' % rolepath, fullpath):
+                    if re.match(r'^%s' % rolepath, fullpath):
                         is_rolepath = True
 
                 # Do not search in roles
