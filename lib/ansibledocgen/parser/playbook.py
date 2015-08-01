@@ -1,7 +1,9 @@
 import yaml
 import re
 
+
 class PlaybookParser(object):
+
     def __init__(self, playbooks, is_role=False):
         self.playbooks = playbooks
         self.parserdata = []

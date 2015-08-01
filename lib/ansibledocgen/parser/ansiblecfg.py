@@ -2,7 +2,9 @@ import os
 import re
 import fnmatch
 
+
 class AnsibleCfg(object):
+
     def __init__(self, project):
         # Search for configs in all locations, including path
         # Load Ansible Configs into a dictionary
@@ -23,11 +25,11 @@ class AnsibleCfg(object):
         if "ANSIBLE_CFG" in os.environ:
             ansible_envpath = os.environ["ANSIBLE_CFG"]
 
-        config_files = ( ansible_envpath,
-            "%s%s"%(self.project, "ansible.cfg"),
-            "%s%s"%(os.path.expanduser("~"),
-                ".ansible.cfg"),
-            "/etc/ansible/ansible.cfg", )
+        config_files = (ansible_envpath,
+                        "%s%s" % (self.project, "ansible.cfg"),
+                        "%s%s" % (os.path.expanduser("~"),
+                                  ".ansible.cfg"),
+                        "/etc/ansible/ansible.cfg", )
 
         # Loop through configs and stop when one is found
         for config in config_files:
@@ -37,7 +39,7 @@ class AnsibleCfg(object):
                     break
 
     def load_config(self, filename):
-        with open (filename, "r") as f:
+        with open(filename, "r") as f:
             self.config = f.read()
 
         for line in self.config.splitlines():
@@ -52,7 +54,8 @@ class AnsibleCfg(object):
             role_paths = self.settings["roles_path"].split(":")
             role_full_paths = []
             for role_path in role_paths:
-                role_full_paths.append("%s%s" % (self.project, role_path.strip("./")))
+                role_full_paths.append(
+                    "%s%s" % (self.project, role_path.strip("./")))
             return role_full_paths
 
     def get_playbook_paths(self):

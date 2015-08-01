@@ -3,9 +3,11 @@ import os
 import fnmatch
 import re
 
+
 class RoleParser(object):
+
     def __init__(self, role_paths):
-        self.role_paths = role_paths 
+        self.role_paths = role_paths
         self.playbooks = []
         self.main_tasks = []
         self.parserdata = []
@@ -16,7 +18,8 @@ class RoleParser(object):
     def find_main_tasks(self):
         for role_path in self.role_paths:
             for root, dirnames, filenames in os.walk(role_path):
-                # WHAT OTHER DIRECTORIES SHOULD I LOOK IN??? handlers/main.yml??
+                # WHAT OTHER DIRECTORIES SHOULD I LOOK IN???
+                # handlers/main.yml??
                 for filename in fnmatch.filter(filenames, '*.yml'):
                     # Absolute path to file
                     fullpath = os.path.join(root, filename)
@@ -31,4 +34,3 @@ class RoleParser(object):
         # Parse all main tasks
         self.playbookparser.parse_playbooks()
         self.parserdata = self.playbookparser.parserdata
-

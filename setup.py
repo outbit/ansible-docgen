@@ -4,6 +4,7 @@ import os
 import sys
 
 sys.path.insert(0, os.path.abspath('lib'))
+from ansibledocgen import __version__, __author__
 
 try:
     from setuptools import setup, find_packages
@@ -14,9 +15,9 @@ except ImportError:
     sys.exit(1)
 
 setup(name='ansible-docgen',
-      version="0.0.1",
+      version=__version__,
       description='Generate Documentation from Annotated Ansible Playbooks and Roles',
-      author="David Whiteside",
+      author=__author__,
       author_email='david@davidwhiteside.com',
       url='http://www.davidwhiteside.com/',
       license='MIT',
