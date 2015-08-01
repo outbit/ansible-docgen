@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 """ Generate documentation from annotated Ansible source code """
-import yaml
 from ansibledocgen.cli import Cli
 
 if __name__ == "__main__":

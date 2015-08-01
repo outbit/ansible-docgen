@@ -1,9 +1,14 @@
+""" Markup Formatter Module """
 import re
 
 
 class FormatterMarkup(object):
+    """ Format Annotations as Markup Documentation """
 
     def __init__(self, parserdata, project):
+        """ @parserdata is an array of dictionaries
+            @project is the path to the project
+        """
         self.parserdata = parserdata
         self.project = project
         """ Example parserdata:
@@ -20,11 +25,14 @@ class FormatterMarkup(object):
         self.write_files()
 
     def parse_data(self):
+        """ Write Each Individual Markup File """
         for sourcefile in self.parserdata:
             self.write_doc(sourcefile)
 
     def write_doc(self, sourcefile):
-        # sourcefile expected: { "author": "", "description": "", "task_names": "", .....}
+        """ @sourcefile is a dictionary, example:
+              { "author": "", "description": "", "task_names": "", .....}
+        """
         # Parse a Role
         if sourcefile["rolename"] is not None:
             m = re.match("^(.*?)%s/tasks" %
@@ -63,6 +71,7 @@ class FormatterMarkup(object):
             self.playbook_outfiles[playbookpath].append("")
 
     def write_files(self):
+        """ Write Formatted Markup Files """
         # Write Role Markup Files
         for rolepath in self.role_outfiles:
             filename = "%s%s" % (rolepath, "README.md")
