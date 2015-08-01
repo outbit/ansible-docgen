@@ -1,4 +1,4 @@
-basic
+Role: basic
 ========================
 author: David Whiteside
 

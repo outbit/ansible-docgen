@@ -15,4 +15,4 @@ class Cli(object):
 
     def run(self):
         self.dirparser = DirParser(self.options.project)
-        self.formatter = FormatterMarkup(self.dirparser.get_parserdata())
+        self.formatter = FormatterMarkup(self.dirparser.get_parserdata(), self.options.project)
