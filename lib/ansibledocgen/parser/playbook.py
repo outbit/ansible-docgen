@@ -39,12 +39,12 @@ class PlaybookParser(object):
                     value = m.group(2)
 
                     # Set
-                    if attribute == "author" or attribute == "description":
+                    if attribute.lower() == "author" or attribute.lower() == "description":
                         playbookentry[attribute] = value
 
             # Parse Task Names from playbook
             for task in yaml.load(data):
                 for key in task:
-                    if key == "name":
+                    if key.lower() == "name":
                         playbookentry["task_names"].append(task[key])
             self.parserdata.append(playbookentry)
