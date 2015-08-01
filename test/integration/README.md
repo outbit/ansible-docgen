@@ -1,8 +1,15 @@
+Playbook: advanced_playbook.yml
+========================
+Author: David Whiteside
+
+Description: Testing a playbook that has roles
+
+
 Playbook: basic_playbook.yml
 ========================
-author: David Whiteside
+Author: David Whiteside
 
-description: Installs and Configured Apache
+Description: Installs and Configured Apache
 
 Task: Install apache
 

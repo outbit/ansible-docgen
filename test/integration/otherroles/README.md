@@ -1,8 +1,8 @@
 Role: apache
 ========================
-author: David Whiteside
+Author: David Whiteside
 
-description: Apache Install and Configuration
+Description: Apache Install and Configuration
 
 Task: install apache
 

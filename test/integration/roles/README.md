@@ -1,8 +1,8 @@
 Role: basic
 ========================
-author: David Whiteside
+Author: David Whiteside
 
-description: Basic NGINX config
+Description: Basic NGINX config
 
 Task: install nginx
 
