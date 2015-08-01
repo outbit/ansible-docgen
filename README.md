@@ -1,11 +1,6 @@
 ansible-docgen
 =====================
 
-License
-=======
-
-ansible-docgen is released under the MIT License.
-
 Description
 ===========
 
@@ -27,3 +22,8 @@ Examples
 ansible-docgen -p your_ansible_project
 
 cd your_ansible_project && ansible-docgen
+
+License
+=======
+
+ansible-docgen is released under the MIT License.
