@@ -13,7 +13,7 @@ class AnsibleCfg(object):
         self.project = project
         self.config = None
         self.settings = {}
-        #self.find_config()
+        self.find_config()
 
     def find_config(self):
         homedir = os.path.expanduser("~")
@@ -23,7 +23,11 @@ class AnsibleCfg(object):
         if "ANSIBLE_CFG" in os.environ:
             ansible_envpath = os.environ["ANSIBLE_CFG"]
 
-        config_files = ( ansible_envpath, "%s%s"%(self.project, "ansible.cfg"), "%s%s"%(os.path.expanduser("~"), ".ansible.cfg"), "/etc/ansible/ansible.cfg", )
+        config_files = ( ansible_envpath,
+            "%s%s"%(self.project, "ansible.cfg"),
+            "%s%s"%(os.path.expanduser("~"),
+                ".ansible.cfg"),
+            "/etc/ansible/ansible.cfg", )
 
         # Loop through configs and stop when one is found
         for config in config_files:
@@ -36,7 +40,7 @@ class AnsibleCfg(object):
         with open (filename, "r") as f:
             self.config = f.read()
 
-        for line in self.config:
+        for line in self.config.splitlines():
             m = re.match(r'^[ ]*(.*?)[ ]*=[ ]*(.*?)$', line)
             if m:
                 self.settings[m.group(1)] = m.group(2)
@@ -45,7 +49,11 @@ class AnsibleCfg(object):
         if "roles_path" not in self.settings:
             return ["%s%s" % (self.project, "roles/")]
         else:
-            return ["%s%s" % (self.project, self.settings["roles_path"])]
+            role_paths = self.settings["roles_path"].split(":")
+            role_full_paths = []
+            for role_path in role_paths:
+                role_full_paths.append("%s%s" % (self.project, role_path.strip("./")))
+            return role_full_paths
 
     def get_playbook_paths(self):
         """ Crawl Directory structure excluding role roles_path
