@@ -31,10 +31,10 @@ class FormatterMarkup(object):
                     self.role_outfiles[roledir] = []
                 self.role_outfiles[roledir].append(sourcefile["rolename"])
                 self.role_outfiles[roledir].append("========================")
-                self.role_outfiles[roledir].append("author: %s" % sourcefile["author"])
-                self.role_outfiles[roledir].append("description: %s" % sourcefile["description"])
+                self.role_outfiles[roledir].append("author: %s\n" % sourcefile["author"])
+                self.role_outfiles[roledir].append("description: %s\n" % sourcefile["description"])
                 for task_name in sourcefile["task_names"]:
-                    self.role_outfiles[roledir].append("Task: %s" % task_name)
+                    self.role_outfiles[roledir].append("Task: %s\n" % task_name)
                 self.role_outfiles[roledir].append("")
         # Parse a Playbook
         else:
