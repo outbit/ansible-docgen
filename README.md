@@ -29,10 +29,16 @@ Examples
 
 ```shell
 ansible-docgen -p your_ansible_project
+Generated Markup File test/integration/otherroles/README.md
+Generated Markup File test/integration/roles/README.md
+Generated Markup File test/integration/README.md
 ```
 
 ```shell
 cd your_ansible_project && ansible-docgen
+Generated Markup File test/integration/otherroles/README.md
+Generated Markup File test/integration/roles/README.md
+Generated Markup File test/integration/README.md
 ```
 
 License
