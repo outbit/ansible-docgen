@@ -44,10 +44,8 @@ class FormatterMarkup(object):
                 self.role_outfiles[roledir].append(
                     "Role: %s" % sourcefile["rolename"])
                 self.role_outfiles[roledir].append("========================")
-                self.role_outfiles[roledir].append(
-                    "Author: %s\n" % sourcefile["author"])
-                self.role_outfiles[roledir].append(
-                    "Description: %s\n" % sourcefile["description"])
+                self.write_attribute(sourcefile, roledir, "author", is_role=True)
+                self.write_attribute(sourcefile, roledir, "description", is_role=True)
                 for task_name in sourcefile["task_names"]:
                     self.role_outfiles[roledir].append(
                         "Task: %s\n" % task_name)
@@ -61,14 +59,26 @@ class FormatterMarkup(object):
                 "Playbook: %s" % sourcefile["relative_path"].replace(playbookpath, ""))
             self.playbook_outfiles[playbookpath].append(
                 "========================")
-            self.playbook_outfiles[playbookpath].append(
-                "Author: %s\n" % sourcefile["author"])
-            self.playbook_outfiles[playbookpath].append(
-                "Description: %s\n" % sourcefile["description"])
+            self.write_attribute(sourcefile, playbookpath, "author")
+            self.write_attribute(sourcefile, playbookpath, "description")
             for task_name in sourcefile["task_names"]:
                 self.playbook_outfiles[playbookpath].append(
                     "Task: %s\n" % task_name)
             self.playbook_outfiles[playbookpath].append("")
+
+    def write_attribute(self, sourcefile, path, attribute, is_role=False):
+        if attribute in sourcefile:
+            if sourcefile[attribute] is not None and sourcefile[attribute] is not "":
+                # Make First Letter Capital and end with an :
+                pretty_attribute = attribute.capitalize()
+
+                # Add to Output File
+                if is_role:
+                    self.role_outfiles[path].append(
+                        "%s: %s\n" % (pretty_attribute, sourcefile[attribute]))
+                else:
+                    self.playbook_outfiles[path].append(
+                        "%s: %s\n" % (pretty_attribute, sourcefile[attribute]))
 
     def write_files(self):
         """ Write Formatted Markup Files """

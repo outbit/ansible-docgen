@@ -16,3 +16,16 @@ Task: Install apache
 Task: Start apache
 
 
+Playbook: nocomments_playbook.yml
+========================
+Task: Install IRC
+
+Task: start irc
+
+
+Playbook: nocommentsortasks_playbook.yml
+========================
+
+Playbook: notasks_playbook.yml
+========================
+
