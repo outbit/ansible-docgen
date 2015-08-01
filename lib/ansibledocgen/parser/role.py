@@ -26,7 +26,7 @@ class RoleParser(object):
 
     def parse_main_tasks(self):
         # Need to determine the rolename per task somehow
-        self.playbookparser = PlaybookParser(self.main_tasks, rolename="TEST ROLENAME")
+        self.playbookparser = PlaybookParser(self.main_tasks, is_role=True)
 
         # Parse all main tasks
         self.playbookparser.parse_playbooks()
