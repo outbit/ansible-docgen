@@ -40,6 +40,8 @@ class Cli(object):
         if self.options.style == "markup":
             self.formatter = FormatterMarkup(
                 self.dirparser.get_parserdata(), project)
+            self.formatter.parse_data()
+            self.formatter.write_files()
         else:
             print("Error: Use of an unsupported style.\
                 The supported styles are: markup")

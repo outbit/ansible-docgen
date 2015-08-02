@@ -22,10 +22,6 @@ class FormatterMarkup(object):
         self.role_outfiles = {}
         self.playbook_outfiles = {}
 
-        self.parse_data()
-
-        self.write_files()
-
     def parse_data(self):
         """ Write Each Individual Markup File """
         for sourcefile in self.parserdata:
