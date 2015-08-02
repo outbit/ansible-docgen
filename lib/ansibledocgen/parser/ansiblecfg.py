@@ -31,8 +31,8 @@ class AnsibleCfg(object):
             ansible_envpath = os.environ["ANSIBLE_CFG"]
 
         config_files = (ansible_envpath,
-                        "%s%s" % (self.project, "ansible.cfg"),
-                        "%s%s" % (homedir, ".ansible.cfg"),
+                        os.path.join(self.project, "ansible.cfg"),
+                        os.path.join(homedir, ".ansible.cfg"),
                         "/etc/ansible/ansible.cfg", )
 
         # Loop through configs and stop when one is found
