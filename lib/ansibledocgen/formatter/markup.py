@@ -67,6 +67,7 @@ class FormatterMarkup(object):
             self.playbook_outfiles[playbookpath].append("")
 
     def write_attribute(self, sourcefile, path, attribute, is_role=False):
+        """ Write a comment attribute to sourcefile """
         if attribute in sourcefile:
             if sourcefile[attribute] is not None and sourcefile[attribute] is not "":
                 # Make First Letter Capital and end with an :
