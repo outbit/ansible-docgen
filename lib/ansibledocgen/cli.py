@@ -1,6 +1,7 @@
 """ Command Line Interface Module """
 import optparse
 import sys
+import os
 from ansibledocgen.parser.dir import DirParser
 from ansibledocgen.formatter.markup import FormatterMarkup
 
@@ -29,13 +30,16 @@ class Cli(object):
 
     def run(self):
         """ Entry Point Of Application """
+        # Make sure there is a trailing /
+        project = os.path.join(self.options.project, "")
+
         # Parse Project for Roles and Playbooks
-        self.dirparser = DirParser(self.options.project)
+        self.dirparser = DirParser(project)
 
         # Based on chosen style, use the associated formatter
         if self.options.style == "markup":
             self.formatter = FormatterMarkup(
-                self.dirparser.get_parserdata(), self.options.project)
+                self.dirparser.get_parserdata(), project)
         else:
             print("Error: Use of an unsupported style.\
                 The supported styles are: markup")

@@ -1,5 +1,6 @@
 """ Markup Formatter Module """
 import re
+import os
 
 
 class FormatterMarkup(object):
@@ -95,6 +96,9 @@ class FormatterMarkup(object):
         """ Write Formatted Markup Files """
         # Write Role Markup Files
         for rolepath in self.role_outfiles:
+            # Make sure there is a trailing /
+            playbookpath = os.path.join(rolepath, "")
+            # Open Output File
             filename = "%s%s" % (rolepath, "README.md")
             with open(filename, "w") as p:
                 for line in self.role_outfiles[rolepath]:
@@ -106,6 +110,9 @@ class FormatterMarkup(object):
 
         # Write Playbook Markup Files
         for playbookpath in self.playbook_outfiles:
+            # Make sure there is a trailing /
+            playbookpath = os.path.join(playbookpath, "")
+            # Open Output File
             filename = "%s%s" % (playbookpath, "README.md")
             with open(filename, "w") as p:
                 for line in self.playbook_outfiles[playbookpath]:
