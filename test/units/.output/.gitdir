@@ -1,0 +1,2 @@
+This file is neede so git includes this directory. Some unittests will write to
+this directory.
