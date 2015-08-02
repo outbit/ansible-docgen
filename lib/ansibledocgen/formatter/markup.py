@@ -11,6 +11,7 @@ class FormatterMarkup(object):
         """
         self.parserdata = parserdata
         self.project = project
+        self.supported_attributes = ["author", "description", "task_names"]
         """ Example parserdata:
         [ { "author": "test",
         "description": "test2",
@@ -33,6 +34,15 @@ class FormatterMarkup(object):
         """ @sourcefile is a dictionary, example:
               { "author": "", "description": "", "task_names": "", .....}
         """
+        # Detect Attributes
+        attributes = []
+        for attribute in self.supported_attributes:
+            if attribute in sourcefile:
+                attributes.append(attributes)
+        # Skip Playbooks With No Annotation or Tasks
+        if len(attributes) <= 0:
+            return
+
         # Parse a Role
         if sourcefile["rolename"] is not None:
             m = re.match("^(.*?)%s/tasks" %
@@ -46,9 +56,10 @@ class FormatterMarkup(object):
                 self.role_outfiles[roledir].append("========================")
                 self.write_attribute(sourcefile, roledir, "author", is_role=True)
                 self.write_attribute(sourcefile, roledir, "description", is_role=True)
-                for task_name in sourcefile["task_names"]:
-                    self.role_outfiles[roledir].append(
-                        "Task: %s\n" % task_name)
+                if "task_names" in sourcefile:
+                    for task_name in sourcefile["task_names"]:
+                        self.role_outfiles[roledir].append(
+                            "Task: %s\n" % task_name)
                 self.role_outfiles[roledir].append("")
         # Parse a Playbook
         else:
@@ -61,9 +72,10 @@ class FormatterMarkup(object):
                 "========================")
             self.write_attribute(sourcefile, playbookpath, "author")
             self.write_attribute(sourcefile, playbookpath, "description")
-            for task_name in sourcefile["task_names"]:
-                self.playbook_outfiles[playbookpath].append(
-                    "Task: %s\n" % task_name)
+            if "task_names" in sourcefile:
+                for task_name in sourcefile["task_names"]:
+                    self.playbook_outfiles[playbookpath].append(
+                        "Task: %s\n" % task_name)
             self.playbook_outfiles[playbookpath].append("")
 
     def write_attribute(self, sourcefile, path, attribute, is_role=False):

@@ -23,9 +23,3 @@ Task: Install IRC
 Task: start irc
 
 
-Playbook: nocommentsortasks_playbook.yml
-========================
-
-Playbook: notasks_playbook.yml
-========================
-

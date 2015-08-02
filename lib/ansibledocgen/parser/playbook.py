@@ -31,7 +31,6 @@ class PlaybookParser(object):
 
             # Setup Playbook Metadata
             playbookentry = {}
-            playbookentry["task_names"] = []
             playbookentry["relative_path"] = playbook
             playbookentry["rolename"] = rolename
 
@@ -39,8 +38,6 @@ class PlaybookParser(object):
             data = f.read()
 
             # Parse Comment Data
-            playbookentry["author"] = ""
-            playbookentry["description"] = ""
             for line in data.splitlines():
                 m = re.match(r"^[ ]*#[ ]*(.*?)[ ]*:[ ]*(.*?)$", line)
                 if m:
@@ -55,5 +52,9 @@ class PlaybookParser(object):
             for task in yaml.load(data):
                 for key in task:
                     if key.lower() == "name":
+                        # Initialize List for tasks
+                        if "task_names" not in playbookentry:
+                            playbookentry["task_names"] = []
+                        # Append a Task
                         playbookentry["task_names"].append(task[key])
             self.parserdata.append(playbookentry)
