@@ -1,5 +1,0 @@
----
-# Author: Me
-# description: this is a test
-- name: 'Install Apache'
-  yum: name=httpd state=installed
