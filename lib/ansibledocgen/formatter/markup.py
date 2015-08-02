@@ -59,7 +59,7 @@ class FormatterMarkup(object):
                 if "task_names" in sourcefile:
                     for task_name in sourcefile["task_names"]:
                         self.role_outfiles[roledir].append(
-                            "> Task: %s\n" % task_name)
+                            "> Task: %s\n\n" % task_name)
             self.role_outfiles[roledir].append("\n")
         # Parse a Playbook
         else:
@@ -74,7 +74,7 @@ class FormatterMarkup(object):
             if "task_names" in sourcefile:
                 for task_name in sourcefile["task_names"]:
                     self.playbook_outfiles[playbookpath].append(
-                        "> Task: %s\n" % task_name)
+                        "> Task: %s\n\n" % task_name)
             self.playbook_outfiles[playbookpath].append("\n")
 
     def write_attribute(self, sourcefile, path, attribute, is_role=False):
@@ -87,10 +87,10 @@ class FormatterMarkup(object):
                 # Add to Output File
                 if is_role:
                     self.role_outfiles[path].append(
-                        "> %s: %s\n" % (pretty_attribute, sourcefile[attribute]))
+                        "> %s: %s\n\n" % (pretty_attribute, sourcefile[attribute]))
                 else:
                     self.playbook_outfiles[path].append(
-                        "> %s: %s\n" % (pretty_attribute, sourcefile[attribute]))
+                        "> %s: %s\n\n" % (pretty_attribute, sourcefile[attribute]))
 
     def write_files(self):
         """ Write Formatted Markup Files """
