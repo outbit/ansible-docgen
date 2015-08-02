@@ -1,4 +1,3 @@
-import nose
 import unittest
 import sys
 import os
