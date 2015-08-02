@@ -1,6 +1,0 @@
----
-# author: David Whiteside
-# description: Apache Install and Configuration
-
-- name: install apache
-  yum: name=apache state=installed
