@@ -12,7 +12,7 @@ install:
     - pip install coveralls
 # command to run tests
 script:
-    - 'export PYTHONPATH="${PYTHONPATH}:./lib"''
+    - 'export PYTHONPATH="${PYTHONPATH}:./lib"'
     - "coverage run --source=ansibledocgen nosetests -w test/units/"
 after_success:
     - coveralls
