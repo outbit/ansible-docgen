@@ -9,6 +9,7 @@ ansible-docgen generates documentation from annotated Ansible Playbooks and Role
 [![alt text](https://secure.travis-ci.org/starboarder2001/ansible-docgen.png?branch=master "ansible-docs latest build")](http://travis-ci.org/starboarder2001/ansible-docgen)
 [![alt text](https://img.shields.io/pypi/v/ansible-docgen.svg "ansible-docs PyPI version")](https://pypi.python.org/pypi/ansible-docgen)
 [![alt text](https://img.shields.io/pypi/dm/ansible-docgen.svg "ansible-docs PyPI downloads")](https://pypi.python.org/pypi/ansible-docgen)
+[![Coverage Status](https://coveralls.io/repos/starboarder2001/ansible-docgen/badge.svg?branch=develop&service=github)](https://coveralls.io/github/starboarder2001/ansible-docgen?branch=develop)
 
 
 Installation
