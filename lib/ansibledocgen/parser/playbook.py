@@ -46,7 +46,7 @@ class PlaybookParser(object):
 
                     # Set An Attribute
                     if attribute.lower() == "author" or attribute.lower() == "description":
-                        playbookentry[attribute] = value
+                        playbookentry[attribute.lower()] = value
 
             # Parse Task Names from playbook
             for task in yaml.load(data):
