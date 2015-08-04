@@ -3,7 +3,7 @@
 
 > **Description:** Basic NGINX config
 
-> Task: install nginx
+> **Task:** install nginx
 
 
 
