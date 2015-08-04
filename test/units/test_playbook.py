@@ -14,7 +14,7 @@ class TestPlaybook(unittest.TestCase):
              f.write("- name: 'Install Apache'\n")
              f.write("  yum: name=httpd state=installed\n")
 
-        playbook = PlaybookParser([testfile], is_role=False)
+        playbook = PlaybookParser([testfile], is_role=True)
 
         playbook.parse_playbooks()
 
