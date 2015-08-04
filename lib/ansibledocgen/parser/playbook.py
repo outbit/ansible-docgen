@@ -49,7 +49,14 @@ class PlaybookParser(object):
                         playbookentry[attribute.lower()] = value
 
             # Parse Task Names from playbook
-            for task in yaml.load(data):
+            yamldata = yaml.load(data)
+            # Skip Empty YAML Files
+            if yamldata is None:
+                return
+
+            # Parase the Yaml
+            for task in yamldata:
+                # Loop through tasks
                 for key in task:
                     if key.lower() == "name":
                         # Initialize List for tasks
