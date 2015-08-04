@@ -1,3 +1,13 @@
+## Role: [advanced](advanced)
+> **Author:** David Whiteside
+
+> **Description:** Advanced NGINX config
+
+> **Task:** install nginx
+
+> **Task:** start nginx
+
+
 ## Role: [basic](basic)
 > **Author:** David Whiteside
 
