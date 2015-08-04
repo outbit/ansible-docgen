@@ -56,12 +56,27 @@ class PlaybookParser(object):
 
             # Parase the Yaml
             for task in yamldata:
-                # Loop through tasks
-                for key in task:
-                    if key.lower() == "name":
-                        # Initialize List for tasks
-                        if "task_names" not in playbookentry:
-                            playbookentry["task_names"] = []
-                        # Append a Task
-                        playbookentry["task_names"].append(task[key])
+                # Playbooks have a tasks dict key
+                if "tasks" in task:
+                    task = task["tasks"]
+                # Loop through Role tasks
+                if isinstance(task, dict) and self.is_role:
+                    for key in task:
+                        if key.lower() == "name":
+                            # Initialize List for tasks
+                            if "task_names" not in playbookentry:
+                                playbookentry["task_names"] = []
+                            # Append a Task
+                            playbookentry["task_names"].append(task[key])
+                # Loop through Playbook tasks
+                elif isinstance(task, list) and not self.is_role:
+                    tasks = task
+                    for task in tasks:
+                        for key in task:
+                            if key.lower() == "name":
+                                # Initialize List for tasks
+                                if "task_names" not in playbookentry:
+                                    playbookentry["task_names"] = []
+                                # Append a Task
+                                playbookentry["task_names"].append(task[key])
             self.parserdata.append(playbookentry)
