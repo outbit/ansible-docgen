@@ -55,7 +55,7 @@ class FormatterMarkup(object):
                 if "task_names" in sourcefile:
                     for task_name in sourcefile["task_names"]:
                         self.role_outfiles[roledir].append(
-                            "> Task: %s\n\n" % task_name)
+                            "> **Task:** %s\n\n" % task_name)
             self.role_outfiles[roledir].append("\n")
         # Parse a Playbook
         else:
