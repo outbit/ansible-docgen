@@ -1,7 +1,7 @@
 ## Role: [apache](apache)
-> Author: David Whiteside
+> **Author:** David Whiteside
 
-> Description: Apache Install and Configuration
+> **Description:** Apache Install and Configuration
 
 > Task: install apache
 

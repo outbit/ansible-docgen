@@ -1,7 +1,7 @@
 ## Role: [basic](basic)
-> Author: David Whiteside
+> **Author:** David Whiteside
 
-> Description: Basic NGINX config
+> **Description:** Basic NGINX config
 
 > Task: install nginx
 
