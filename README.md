@@ -52,7 +52,7 @@ Usage
 
 `ansible-docgen -p your_ansible_project`
 
-`Generated Markup File` [your_ansible_project/otherroles/README.md](test/integration/project1/otherroles/README.md)
+`Generated Markup File` [your_ansible_project/rolestest/README.md](test/integration/project1/rolestest/README.md)
 
 `Generated Markup File` [your_ansible_project/roles/README.md](test/integration/project1/roles/README.md)
 
