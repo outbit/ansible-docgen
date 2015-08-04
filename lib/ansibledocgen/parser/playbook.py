@@ -25,7 +25,7 @@ class PlaybookParser(object):
             # Get Rolename from filepath
             rolename = None
             if self.is_role:
-                m = re.match(r".*roles/(.*?)/.*", playbook)
+                m = re.match(r".*/(.*?)/tasks/main.yml", playbook)
                 if m:
                     rolename = m.group(1)
 
