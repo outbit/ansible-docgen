@@ -1,29 +1,29 @@
 ## Playbook: [advanced_playbook.yml](advanced_playbook.yml)
-> Author: David Whiteside
+> **Author:** David Whiteside
 
-> Description: Testing a playbook that has roles
+> **Description:** Testing a playbook that has roles
 
 
 ## Playbook: [basic_playbook.yml](basic_playbook.yml)
-> Author: David Whiteside
+> **Author:** David Whiteside
 
-> Description: Installs and Configured Apache
+> **Description:** Installs and Configured Apache
 
-> Task: Install apache
+> **Task:** Install apache
 
-> Task: Start apache
+> **Task:** Start apache
 
 
 ## Playbook: [nocomments_playbook.yml](nocomments_playbook.yml)
-> Task: Install IRC
+> **Task:** Install IRC
 
-> Task: start irc
+> **Task:** start irc
 
 
 ## Playbook: [notasks_playbook.yml](notasks_playbook.yml)
-> Author: David Whiteside
+> **Author:** David Whiteside
 
-> Description: Installs and Configured Apache
+> **Description:** Installs and Configured Apache
 
 
 
