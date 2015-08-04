@@ -7,3 +7,5 @@
 
 - name: start nginx
   service: name=nginx state=started
+
+- include: "doextra.yml"
