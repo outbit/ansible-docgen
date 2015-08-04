@@ -55,7 +55,7 @@ class AnsibleCfg(object):
     def get_role_paths(self):
         """ Get Role Paths Base on Ansible Config """
         if "roles_path" not in self.settings:
-            return ["%s%s" % (self.project, "roles/")]
+            return [os.path.join(self.project, "roles/")]
         else:
             role_paths = self.settings["roles_path"].split(":")
             role_full_paths = []
