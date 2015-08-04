@@ -1,6 +1,7 @@
 """ Playbook Module """
 import yaml
 import re
+import os
 
 
 class PlaybookParser(object):
@@ -13,6 +14,8 @@ class PlaybookParser(object):
         self.playbooks = playbooks
         self.parserdata = []
         self.is_role = is_role
+        # basename of playbooks already parsed, to prevent infinate recrusion
+        self.already_parsed_playbooks = []
 
     def parse_playbooks(self):
         """ Parse Each Playbook """
@@ -28,6 +31,16 @@ class PlaybookParser(object):
                 m = re.match(r".*/(.*?)/tasks/main.yml", playbook)
                 if m:
                     rolename = m.group(1)
+
+            # Do Not Parse If Its Already been Parsed
+            playbook_base = os.path.basename(playbook)
+            if self.is_role:
+                # If Role, prepend rolename to make file unique to role
+                playbook_base = os.path.join(rolename, playbook_base)
+            # Check if this file has alread been parsed
+            if playbook_base in self.already_parsed_playbooks:
+                return
+            self.already_parsed_playbooks.append(playbook_base)
 
             # Setup Playbook Metadata
             playbookentry = {}
