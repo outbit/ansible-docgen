@@ -95,7 +95,7 @@ class FormatterMarkup(object):
             # Make sure there is a trailing /
             playbookpath = os.path.join(rolepath, "")
             # Open Output File
-            filename = "%s%s" % (rolepath, "README.md")
+            filename = os.path.join(rolepath, "README.md")
             with open(filename, "w") as p:
                 for line in self.role_outfiles[rolepath]:
                     p.write("%s" % line)
@@ -109,7 +109,7 @@ class FormatterMarkup(object):
             # Make sure there is a trailing /
             playbookpath = os.path.join(playbookpath, "")
             # Open Output File
-            filename = "%s%s" % (playbookpath, "README.md")
+            filename = os.path.join(playbookpath, "README.md")
             with open(filename, "w") as p:
                 for line in self.playbook_outfiles[playbookpath]:
                     p.write("%s" % line)

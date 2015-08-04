@@ -61,7 +61,7 @@ class AnsibleCfg(object):
             role_full_paths = []
             for role_path in role_paths:
                 role_full_paths.append(
-                    "%s%s" % (self.project, role_path.strip("./")))
+                    os.path.join(self.project, role_path.strip("./")))
             return role_full_paths
 
     def get_playbook_paths(self):
