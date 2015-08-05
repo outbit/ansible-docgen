@@ -22,24 +22,25 @@ class Cli(object):
                           Default is markup. Example: --style=[markup]",
                           metavar="STYLE",
                           default="markup")
-        (self.options, self.args) = parser.parse_args()
+        (options, args) = parser.parse_args()
+
+        # Make sure there is a trailing /
+        self.project = os.path.join(options.project, "")
+        self.style = options.style
 
         # Used to Parse Roles and Playbooks
         self.dirparser = None
         self.formatter = None
 
     def run(self):
-        """ Entry Point Of Application """
-        # Make sure there is a trailing /
-        project = os.path.join(self.options.project, "")
-
+        """ EntryPoint Of Application """
         # Parse Project for Roles and Playbooks
-        self.dirparser = DirParser(project)
+        self.dirparser = DirParser(self.project)
 
         # Based on chosen style, use the associated formatter
-        if self.options.style == "markup":
+        if self.style == "markup":
             self.formatter = FormatterMarkup(
-                self.dirparser.get_parserdata(), project)
+                self.dirparser.get_parserdata(), self.project)
             self.formatter.parse_data()
             self.formatter.write_files()
         else:

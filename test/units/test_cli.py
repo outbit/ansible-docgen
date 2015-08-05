@@ -6,5 +6,12 @@ import sys
 class TestCli(unittest.TestCase):
     def test_help(self):
         sys.argv[1:] = "-h"
-        cli = Cli()
-        assert(cli.options is not None or cli.args is not None)
+        clivar = Cli()
+        assert("h" in clivar.args)
+
+    def test_project(self):
+        sys.argv[1] = "-p"
+        sys.argv[2] = "testdir"
+        clivar = Cli()
+        assert(clivar.project is "testdir")
+
