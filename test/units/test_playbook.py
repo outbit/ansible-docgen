@@ -11,10 +11,12 @@ class TestPlaybook(unittest.TestCase):
              f.write("---\n")
              f.write("# Author: Me\n")
              f.write("# description: this is a test\n")
-             f.write("- name: 'Install Apache'\n")
-             f.write("  yum: name=httpd state=installed\n")
+             f.write("- hosts: testhosts\n")
+             f.write("  tasks:\n")
+             f.write("     - name: 'Install Apache'\n")
+             f.write("       yum: name=httpd state=installed\n")
 
-        playbook = PlaybookParser([testfile], is_role=True)
+        playbook = PlaybookParser([testfile], is_role=False)
 
         playbook.parse_playbooks()
 
