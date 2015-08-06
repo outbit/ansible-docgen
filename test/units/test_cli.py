@@ -2,6 +2,7 @@ import nose
 from ansibledocgen.cli import Cli
 import unittest
 import sys
+import os
 
 class TestCli(unittest.TestCase):
     def test_project(self):
@@ -25,3 +26,16 @@ class TestCli(unittest.TestCase):
         cli = Cli()
         assert(cli.style == "markup")
 
+    def test_run(self):
+        localdir = os.path.dirname(os.path.realpath(__file__))
+        projectunit = os.path.join(localdir, "../integration/projectunit")
+        sys.argv[1] = "-p"
+        sys.argv[2] = projectunit
+        cli = Cli()
+        cli.run()
+
+        assert( os.path.isfile( os.path.join(projectunit,  "README.md") ) )
+
+        assert( os.path.isfile( os.path.join(projectunit,  "roles/README.md") ) )
+
+        assert( os.path.isfile( os.path.join(projectunit,  "rolestest/README.md") ) )

@@ -3,7 +3,7 @@ import optparse
 import sys
 import os
 from ansibledocgen.parser.dir import DirParser
-from ansibledocgen.formatter.markup import FormatterMarkup
+from ansibledocgen.formatter.markup import MarkupFormatter
 
 
 class Cli(object):
@@ -39,7 +39,7 @@ class Cli(object):
 
         # Based on chosen style, use the associated formatter
         if self.style == "markup":
-            self.formatter = FormatterMarkup(
+            self.formatter = MarkupFormatter(
                 self.dirparser.get_parserdata(), self.project)
             self.formatter.parse_data()
             self.formatter.write_files()

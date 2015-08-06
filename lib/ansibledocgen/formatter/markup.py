@@ -3,7 +3,7 @@ import re
 import os
 
 
-class FormatterMarkup(object):
+class MarkupFormatter(object):
     """ Format Annotations as Markup Documentation """
 
     def __init__(self, parserdata, project):

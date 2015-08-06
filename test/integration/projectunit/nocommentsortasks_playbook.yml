@@ -1,0 +1,7 @@
+---
+- hosts: testhosts
+  tasks:
+
+    -  yum: name=apache2 state=installed
+
+    -  service: name=httpd state=started enabled=yes

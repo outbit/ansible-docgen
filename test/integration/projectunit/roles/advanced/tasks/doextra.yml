@@ -1,0 +1,3 @@
+---
+- name: Do Extra
+  yum: name=* state=updated
