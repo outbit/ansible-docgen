@@ -47,5 +47,3 @@ class Cli(object):
             print("Error: Use of an unsupported style.\
                 The supported styles are: markup")
             sys.exit(1)
-
-        sys.exit(0)
