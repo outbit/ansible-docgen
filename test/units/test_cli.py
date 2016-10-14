@@ -4,7 +4,9 @@ import unittest
 import sys
 import os
 
+
 class TestCli(unittest.TestCase):
+
     def test_project(self):
         # Test Specified Path
         sys.argv[1] = "-p"
@@ -34,8 +36,12 @@ class TestCli(unittest.TestCase):
         cli = Cli()
         cli.run()
 
-        assert( os.path.isfile( os.path.join(projectunit,  "README.md") ) )
+        assert(os.path.isfile(os.path.join(projectunit, "README.md")))
 
-        assert( os.path.isfile( os.path.join(projectunit,  "roles/README.md") ) )
+        assert(os.path.isfile(os.path.join(projectunit, "roles/README.md")))
 
-        assert( os.path.isfile( os.path.join(projectunit,  "rolestest/README.md") ) )
+        assert(
+            os.path.isfile(
+                os.path.join(
+                    projectunit,
+                    "rolestest/README.md")))
