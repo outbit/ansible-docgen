@@ -3,3 +3,5 @@
 *.tar.gz
 *.coverage
 .output
+/dist
+/build
