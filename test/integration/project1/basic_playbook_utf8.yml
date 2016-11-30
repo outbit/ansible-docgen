@@ -1,0 +1,11 @@
+---
+# description: Installs and Configured Apache شيشه ب
+# author: David Whiteside شيشه ب
+
+- hosts: testhost
+  tasks:
+    - name: Install apache شيشه ب
+      yum: name=apache2 state=installed
+
+    - name: Start apache شيشه ب
+      service: name=httpd state=started enabled=yes
