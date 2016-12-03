@@ -2,6 +2,7 @@
 import os
 import re
 import fnmatch
+import codecs
 
 
 class AnsibleCfg(object):
@@ -44,7 +45,7 @@ class AnsibleCfg(object):
 
     def load_config(self, filename):
         """ Load An Individual AnsibleConfig """
-        with open(filename, "r") as f:
+        with codecs.open(filename, "r", encoding="utf-8") as f:
             self.config = f.read()
 
         for line in self.config.splitlines():

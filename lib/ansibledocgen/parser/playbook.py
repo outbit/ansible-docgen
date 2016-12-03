@@ -2,6 +2,7 @@
 import yaml
 import re
 import os
+import codecs
 
 
 class PlaybookParser(object):
@@ -24,7 +25,7 @@ class PlaybookParser(object):
 
     def parse_playbook(self, playbook):
         """ Parse an Individual Playbook """
-        with open(playbook) as f:
+        with codecs.open(playbook, "r", encoding="utf-8") as f:
             # Get Rolename from filepath
             rolename = None
             if self.is_role:
