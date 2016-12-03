@@ -73,4 +73,4 @@ Usage
 License
 =======
 
-ansible-docgen is released under the MIT License.
+ansible-docgen is released under the [MIT License](LICENSE.md).
