@@ -22,11 +22,18 @@ class Cli(object):
                           Default is markup. Example: --style=[markup]",
                           metavar="STYLE",
                           default="markup")
+        parser.add_option("-n", "--no-tags", dest="show_tags",
+                          action='store_false',
+                          help="This opcion disable show tags in documentation",
+                          metavar="TAGS",
+                          default=True)
         (options, args) = parser.parse_args()
 
         # Make sure there is a trailing /
         self.project = os.path.join(options.project, "")
         self.style = options.style
+        self.params = {}
+        self.params['show_tags'] = options.show_tags
 
         # Used to Parse Roles and Playbooks
         self.dirparser = None
@@ -40,7 +47,7 @@ class Cli(object):
         # Based on chosen style, use the associated formatter
         if self.style == "markup":
             self.formatter = MarkupFormatter(
-                self.dirparser.get_parserdata(), self.project)
+                self.dirparser.get_parserdata(), self.project, self.params)
             self.formatter.parse_data()
             self.formatter.write_files()
         else:
