@@ -35,9 +35,9 @@ class TestPlaybook(unittest.TestCase):
 
         assert("task_info" in playbook.parserdata[0])
         
-        assert("task_name" in playbook.parserdata[0]['task_info'])
+        assert("task_name" in playbook.parserdata[0]['task_info'][0])
         
-        assert("task_tag" in playbook.parserdata[0]['task_info'])
+        assert("task_tag" in playbook.parserdata[0]['task_info'][0])
 
         assert(playbook.parserdata[0]["rolename"] is None)
 
@@ -71,8 +71,8 @@ class TestPlaybook(unittest.TestCase):
 
         assert("task_info" in playbook.parserdata[0])
         
-        assert("task_name" in playbook.parserdata[0]['task_info'])
+        assert("task_name" in playbook.parserdata[0]['task_info'][0])
         
-        assert("task_tag" in playbook.parserdata[0]['task_info'])
+        assert("task_tag" in playbook.parserdata[0]['task_info'][0])
 
         assert(playbook.parserdata[0]["rolename"] == ".output")
