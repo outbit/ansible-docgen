@@ -24,7 +24,7 @@ class Cli(object):
                           default="markup")
         parser.add_option("-n", "--no-tags", dest="show_tags",
                           action='store_false',
-                          help="This opcion disable show tags in documentation",
+                          help="This option disables show tags in the documentation",
                           metavar="TAGS",
                           default=True)
         (options, args) = parser.parse_args()
