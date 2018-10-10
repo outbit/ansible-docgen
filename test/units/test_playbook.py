@@ -19,6 +19,8 @@ class TestPlaybook(unittest.TestCase):
             f.write("  tasks:\n")
             f.write(u"     - name: 'Install Apache شيشه ب'\n")
             f.write(u"       yum: name=httpd state=inشtalled\n")
+            f.write(u"       tags:\n")
+            f.write(u"           - apache\n")
 
         playbook = PlaybookParser([testfile], is_role=False)
 
@@ -31,7 +33,11 @@ class TestPlaybook(unittest.TestCase):
 
         assert("description" in playbook.parserdata[0])
 
-        assert("task_names" in playbook.parserdata[0])
+        assert("task_info" in playbook.parserdata[0])
+        
+        assert("task_name" in playbook.parserdata[0]['task_info'][0])
+        
+        assert("task_tag" in playbook.parserdata[0]['task_info'][0])
 
         assert(playbook.parserdata[0]["rolename"] is None)
 
@@ -49,6 +55,8 @@ class TestPlaybook(unittest.TestCase):
             f.write("# description: this is a test\n")
             f.write("- name: 'Install Apache'\n")
             f.write("  yum: name=httpd state=installed\n")
+            f.write("  tags:\n")
+            f.write("    - apache\n")
 
         playbook = PlaybookParser([testfile], is_role=True)
 
@@ -61,6 +69,10 @@ class TestPlaybook(unittest.TestCase):
 
         assert("description" in playbook.parserdata[0])
 
-        assert("task_names" in playbook.parserdata[0])
+        assert("task_info" in playbook.parserdata[0])
+        
+        assert("task_name" in playbook.parserdata[0]['task_info'][0])
+        
+        assert("task_tag" in playbook.parserdata[0]['task_info'][0])
 
         assert(playbook.parserdata[0]["rolename"] == ".output")
