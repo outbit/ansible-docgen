@@ -7,13 +7,14 @@ import codecs
 class MarkupFormatter(object):
     """ Format Annotations as Markup Documentation """
 
-    def __init__(self, parserdata, project):
+    def __init__(self, parserdata, project, params):
         """ @parserdata is an array of dictionaries
             @project is the path to the project
         """
         self.parserdata = parserdata
         self.project = project
-        self.supported_attributes = ["author", "description", "task_names"]
+        self.params = params
+        self.supported_attributes = ["author", "description", "task_info"]
         """ Example parserdata:
         [ { "author": "test",
         "description": "test2",
@@ -27,7 +28,26 @@ class MarkupFormatter(object):
         """ Write Each Individual Markup File """
         for sourcefile in self.parserdata:
             self.write_doc(sourcefile)
-
+            
+    def __create_task_info_structure__(self, sourcefile):
+        '''
+        @author: Y_mil        
+        @contact: lylinquiman@gmail.com
+        @param sourcefile: sourcefile type
+        @return: All task name and tags in order for create markup
+        @rtype: list
+        This Function go through all taks and create the list for create markup        
+        '''
+        list_data = []        
+        for task_info in sourcefile['task_info']:
+            print(task_info['task_name'])
+            list_data.append(
+                u"> **Task:** %s\n\n" % task_info['task_name'])
+            if not task_info['task_tags'] == None and self.params['show_tags']:
+                 list_data.append(u"> - **Tags:** %s\n\n" % \
+                                  (", ".join(task_info['task_tags'])))
+        return list_data
+            
     def write_doc(self, sourcefile):
         """ @sourcefile is a dictionary, example:
               { "author": "", "description": "", "task_names": "", .....}
@@ -56,10 +76,9 @@ class MarkupFormatter(object):
                     sourcefile, roledir, "author", is_role=True)
                 self.write_attribute(
                     sourcefile, roledir, "description", is_role=True)
-                if "task_names" in sourcefile:
-                    for task_name in sourcefile["task_names"]:
-                        self.role_outfiles[roledir].append(
-                            u"> **Task:** %s\n\n" % task_name)
+                if "task_info" in sourcefile:
+                    self.role_outfiles[roledir] += self.__create_task_info_structure__(sourcefile)
+                        
             self.role_outfiles[roledir].append("\n")
         # Parse a Playbook
         else:
@@ -73,10 +92,8 @@ class MarkupFormatter(object):
                     playbookpath, "")))
             self.write_attribute(sourcefile, playbookpath, "author")
             self.write_attribute(sourcefile, playbookpath, "description")
-            if "task_names" in sourcefile:
-                for task_name in sourcefile["task_names"]:
-                    self.playbook_outfiles[playbookpath].append(
-                        u"> **Task:** %s\n\n" % task_name)
+            if "task_info" in sourcefile:
+                self.playbook_outfiles[playbookpath] += self.__create_task_info_structure__(sourcefile)                             
             self.playbook_outfiles[playbookpath].append("\n")
 
     def write_attribute(self, sourcefile, path, attribute, is_role=False):

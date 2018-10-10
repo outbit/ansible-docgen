@@ -23,6 +23,27 @@ class PlaybookParser(object):
         for playbook in self.playbooks:
             self.parse_playbook(playbook)
 
+    def __get_task_info__(self, task):
+        '''
+        @author: Y_mil        
+        @contact: lylinquiman@gmail.com
+        @param task: variable task type
+        @return: {'task_name': 'xxx', 'task_tags': ['xxx' | None ]} \
+            or false in case the no have the name task
+        @rtype: dict or boolean
+        This Function go through all task and create the dict with task name \ 
+        and tags. In this function is possibly adding more variables.        
+        '''
+        if "name" in task:
+            task_info = {'task_name': None, 'task_tags': None}
+            task_name = task["name"]            
+            task_info["task_name"] = task_name
+            if "tags" in task:
+                if not task["tags"] == None:
+                    task_info["task_tags"] = task["tags"]
+            return task_info
+        return False
+    
     def parse_playbook(self, playbook):
         """ Parse an Individual Playbook """
         with codecs.open(playbook, "r", encoding="utf-8") as f:
@@ -47,6 +68,7 @@ class PlaybookParser(object):
             playbookentry = {}
             playbookentry["relative_path"] = playbook
             playbookentry["rolename"] = rolename
+            playbookentry["task_info"] = []
 
             # Read file content into data
             data = f.read()
@@ -75,22 +97,15 @@ class PlaybookParser(object):
                     task = task["tasks"]
                 # Loop through Role tasks
                 if isinstance(task, dict) and self.is_role:
-                    for key in task:
-                        if key.lower() == "name":
-                            # Initialize List for tasks
-                            if "task_names" not in playbookentry:
-                                playbookentry["task_names"] = []
-                            # Append a Task
-                            playbookentry["task_names"].append(task[key])
+                    task_info = self.__get_task_info__(task)
+                    if not task_info == False:
+                        playbookentry["task_info"].append(task_info)
                 # Loop through Playbook tasks
                 elif isinstance(task, list) and not self.is_role:
                     tasks = task
                     for task in tasks:
-                        for key in task:
-                            if key.lower() == "name":
-                                # Initialize List for tasks
-                                if "task_names" not in playbookentry:
-                                    playbookentry["task_names"] = []
-                                # Append a Task
-                                playbookentry["task_names"].append(task[key])
+                        task_info = self.__get_task_info__(task)
+                        if not task_info == False:
+                            playbookentry["task_info"].append(task_info)
+                # Loop through Playbook tasks
             self.parserdata.append(playbookentry)
