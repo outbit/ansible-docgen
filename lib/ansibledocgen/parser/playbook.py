@@ -9,8 +9,9 @@ class PlaybookParser(object):
     """ Parse An Individual Playbook """
 
     def __init__(self, playbooks, is_role=False):
-        """ @playbooks is a list of paths to playbooks
-            @is_role is used to determine if the playbook is part of a role
+        """ 
+        @param playbooks: is a list of paths to playbooks
+        @param is_role: is used to determine if the playbook is part of a role
         """
         self.playbooks = playbooks
         self.parserdata = []
@@ -28,7 +29,7 @@ class PlaybookParser(object):
         @author: Y_mil        
         @contact: lylinquiman@gmail.com
         @param task: variable task type
-        @return: {'task_name': 'xxx', 'task_tags': ['xxx' | None ]} \
+        @return: {'task_name': 'xxx', 'task_tags': ['xxx' | None ]} 
             or false in case the no have the name task
         @rtype: dict or boolean
         This Function go through all task and create the dict with task name \ 
@@ -48,17 +49,20 @@ class PlaybookParser(object):
         """ Parse an Individual Playbook """
         with codecs.open(playbook, "r", encoding="utf-8") as f:
             # Get Rolename from filepath
-            rolename = None
+            name = None
             if self.is_role:
                 m = re.match(r".*/(.*?)/tasks/main.yml", playbook)
                 if m:
-                    rolename = m.group(1)
-
+                    name = m.group(1)
+            else:
+                m = re.match(r".*/(.*?).yml", playbook)
+                if m:
+                    name = m.group(1)
             # Do Not Parse If Its Already been Parsed
             playbook_base = os.path.basename(playbook)
             if self.is_role:
                 # If Role, prepend rolename to make file unique to role
-                playbook_base = "%s/%s" % (rolename, playbook_base)
+                playbook_base = "%s/%s" % (name, playbook_base)
             # Check if this file has alread been parsed
             if playbook_base in self.already_parsed_playbooks:
                 return
@@ -67,8 +71,9 @@ class PlaybookParser(object):
             # Setup Playbook Metadata
             playbookentry = {}
             playbookentry["relative_path"] = playbook
-            playbookentry["rolename"] = rolename
+            playbookentry["name"] = name
             playbookentry["task_info"] = []
+            playbookentry["is_role"] = self.is_role
 
             # Read file content into data
             data = f.read()
