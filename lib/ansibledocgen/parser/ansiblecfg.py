@@ -3,7 +3,7 @@ import os
 import re
 import fnmatch
 import codecs
-
+import pdb
 
 class AnsibleCfg(object):
     """ Parse an Ansible Config File """
@@ -85,5 +85,12 @@ class AnsibleCfg(object):
                 # Do not search in roles
                 if not is_rolepath:
                     playbooks.append(fullpath)
-
+        
         return playbooks
+    
+    def get_hosts_paths(self):
+        """ Get host vars Paths Base on Ansible Config 
+        @return: host_vars path base
+        @rtype: list
+        """
+        return [os.path.join(self.project, "host_vars")]
