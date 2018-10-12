@@ -23,10 +23,13 @@ setup(
     url='https://github.com/starboarder2001/ansible-docgen',
     license='MIT',
     install_requires=[
-        "PyYAML",
-        'setuptools'],
+        'PyYAML',
+        'setuptools',
+	'jinja2'],
+    include_package_data=True,
     package_dir={
         '': 'lib'},
+    package_data = { '': ['*.j2']},
     packages=find_packages('lib'),
     classifiers=[
         'Environment :: Console',
