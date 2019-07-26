@@ -3,7 +3,6 @@ import os
 import re
 import fnmatch
 import codecs
-import pdb
 
 class AnsibleCfg(object):
     """ Parse an Ansible Config File """
