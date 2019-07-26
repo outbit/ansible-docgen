@@ -10,7 +10,7 @@ install:
     - pip install nose
     - pip install pyyaml
     - pip install coveralls
-
+    - pip install jinja2
 # Run Tests
 script:
     - './run_tests.sh'
