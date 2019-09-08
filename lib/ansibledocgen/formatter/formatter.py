@@ -23,10 +23,26 @@ class Formatter(object):
     
     def write_files(self):
         for dic_name in self.render_files:
+            readme_top = os.path.join(self.paths[dic_name][0], "README-TOP.md")
+            readme_bottom = os.path.join(self.paths[dic_name][0], "README-BOTTOM.md")
+            readme_top_content = ""
+            readme_bottom_content = ""
+            ''' README-TOP: if this file exists it's concatenated at the top of 
+                README.md created by ansibledocgen'''
+            if os.path.exists(readme_top):
+                with codecs.open(readme_top, "r", encoding="UTF-8") as f:
+                    readme_top_content = f.read()
+            if os.path.exists(readme_bottom):
+                with codecs.open(readme_bottom, "r", encoding="UTF-8") as f:
+                    readme_bottom_content = f.read()
             file_dest = os.path.join(self.paths[dic_name][0], "README.md")
             render_file = self.render_files[dic_name]
             with codecs.open(file_dest, "w", encoding="utf-8") as f:
+                f.write(readme_top_content)
+                f.write("\n")
                 f.write(render_file)
+                f.write("\n")
+                f.write(readme_bottom_content)
                 
     def __make_playbook_template__(self):
         with open(os.path.join(self.templates_dir,self.templates_files['playbook'])) as file_:
