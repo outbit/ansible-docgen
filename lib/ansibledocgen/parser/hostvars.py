@@ -72,7 +72,7 @@ class HostVarsParser(object):
                             if attribute.lower() == "author" or attribute.lower() == "description":
                                  structure[file_host_var][attribute.lower()] = value
                                  
-                    yamldata = yaml.load(data)
+                    yamldata = yaml.load(data, Loader=yaml.SafeLoader)
                     
                     if yamldata == None:
                         del structure[file_host_var]

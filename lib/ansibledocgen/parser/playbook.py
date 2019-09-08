@@ -90,7 +90,7 @@ class PlaybookParser(object):
                         playbookentry[attribute.lower()] = value
 
             # Parse Task Names from playbook
-            yamldata = yaml.load(data)
+            yamldata = yaml.load(data, Loader=yaml.SafeLoader)
             # Skip Empty YAML Files
             if yamldata is None:
                 return
