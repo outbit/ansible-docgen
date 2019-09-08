@@ -24,10 +24,10 @@ class HostVarsParser(object):
         @rtype: dict
         """
         for path in self.paths:
-            path_full = os.path.join(self.paths, path)
+            #path_full = os.path.join(self.paths, path)
             for folder in os.listdir(path):
                 print("Capture in {}".format(folder))
-                path_full_folder = os.path.join(path_full, folder)
+                path_full_folder = os.path.join(path, folder)
                 host_vars = self.parse_host_vars(path_full_folder)
                 if host_vars:
                     self.parserdata[folder] = host_vars
