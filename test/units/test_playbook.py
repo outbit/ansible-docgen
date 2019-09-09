@@ -11,6 +11,7 @@ class TestPlaybook(unittest.TestCase):
     def test_parser_playbook(self):
         localdir = os.path.dirname(os.path.realpath(__file__))
         testfile = os.path.join(localdir, ".output/testplaybook.yml")
+        folder_testfile = os.path.join(localdir, ".output")
         with codecs.open(testfile, "w", encoding="utf-8") as f:
             f.write("---\n")
             f.write(u"# Author: Me شيشه ب\n")
@@ -28,18 +29,17 @@ class TestPlaybook(unittest.TestCase):
 
         # One Element in Array
         assert(len(playbook.parserdata) == 1)
+        assert("author" in playbook.parserdata[folder_testfile][0])
 
-        assert("author" in playbook.parserdata[0])
+        assert("description" in playbook.parserdata[folder_testfile][0])
 
-        assert("description" in playbook.parserdata[0])
-
-        assert("task_info" in playbook.parserdata[0])
+        assert("task_info" in playbook.parserdata[folder_testfile][0])
         
-        assert("task_name" in playbook.parserdata[0]['task_info'][0])
+        assert("task_name" in playbook.parserdata[folder_testfile][0]['task_info'][0])
         
-        assert("task_tag" in playbook.parserdata[0]['task_info'][0])
+        assert("task_tags" in playbook.parserdata[folder_testfile][0]['task_info'][0])
 
-        assert(playbook.parserdata[0]["rolename"] is None)
+        assert(playbook.parserdata[folder_testfile][0]["is_role"] is False)
 
     def test_parser_role_playbook(self):
         # Find Directory Of This Test
@@ -49,6 +49,7 @@ class TestPlaybook(unittest.TestCase):
             os.makedirs(os.path.join(localdir, ".output/tasks/"))
         # Set Output File
         testfile = os.path.join(localdir, ".output/tasks/main.yml")
+        folder_testfile = localdir
         with open(testfile, "w") as f:
             f.write("---\n")
             f.write("# Author: Me\n")
@@ -59,20 +60,19 @@ class TestPlaybook(unittest.TestCase):
             f.write("    - apache\n")
 
         playbook = PlaybookParser([testfile], is_role=True)
-
         playbook.parse_playbooks()
 
         # One Element in Array
         assert(len(playbook.parserdata) == 1)
 
-        assert("author" in playbook.parserdata[0])
+        assert("author" in playbook.parserdata[folder_testfile][0])
 
-        assert("description" in playbook.parserdata[0])
+        assert("description" in playbook.parserdata[folder_testfile][0])
 
-        assert("task_info" in playbook.parserdata[0])
+        assert("task_info" in playbook.parserdata[folder_testfile][0])
         
-        assert("task_name" in playbook.parserdata[0]['task_info'][0])
+        assert("task_name" in playbook.parserdata[folder_testfile][0]['task_info'][0])
         
-        assert("task_tag" in playbook.parserdata[0]['task_info'][0])
+        assert("task_tags" in playbook.parserdata[folder_testfile][0]['task_info'][0])
 
-        assert(playbook.parserdata[0]["rolename"] == ".output")
+        assert(playbook.parserdata[folder_testfile][0]["name"] == ".output")
