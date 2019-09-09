@@ -46,6 +46,7 @@ class Cli(object):
 
         # Based on chosen style, use the associated formatter
         parserdata = self.dirparser.get_parserdata()
+        
         paths = self.dirparser.get_paths()
         if self.style == "markup":
             self.formatter = Formatter('markup', parserdata, paths,\

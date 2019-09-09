@@ -26,7 +26,6 @@ class HostVarsParser(object):
         for path in self.paths:
             #path_full = os.path.join(self.paths, path)
             for folder in os.listdir(path):
-                print("Capture in {}".format(folder))
                 path_full_folder = os.path.join(path, folder)
                 host_vars = self.parse_host_vars(path_full_folder)
                 if host_vars:
@@ -57,9 +56,8 @@ class HostVarsParser(object):
                     continue                
                 path_full = os.path.join(path, file_host_var)
                 #path_full = os.path.realpath(path_full) # Following symbolic links
-                structure[file_host_var] = {}
+                structure[file_host_var] = {}                
                 structure[file_host_var]['relative_path'] = str(path_full)
-                print("Capture file: {}".format(str(path_full)))
                 with codecs.open(path_full, "r", encoding="utf-8", errors='ignore') as f:
                     data = f.read()
                     for line in data.splitlines():

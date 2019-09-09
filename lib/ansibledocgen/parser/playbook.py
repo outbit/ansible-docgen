@@ -14,7 +14,7 @@ class PlaybookParser(object):
         @param is_role: is used to determine if the playbook is part of a role
         """
         self.playbooks = playbooks
-        self.parserdata = []
+        self.parserdata = dict()
         self.is_role = is_role
         # basename of playbooks already parsed, to prevent infinate recrusion
         self.already_parsed_playbooks = []
@@ -51,18 +51,19 @@ class PlaybookParser(object):
             # Get Rolename from filepath
             name = None
             if self.is_role:
-                m = re.match(r".*/(.*?)/tasks/main.yml", playbook)
-                if m:
-                    name = m.group(1)
+                name = os.path.basename(
+                            os.path.normpath(
+                                os.path.join(playbook, "../..")))
+                folder_content = os.path.normpath(
+                                    os.path.join(playbook, "../../.."))
             else:
+                folder_content = os.path.normpath(
+                                    os.path.join(playbook, ".."))
                 m = re.match(r".*/(.*?).yml", playbook)
                 if m:
                     name = m.group(1)
             # Do Not Parse If Its Already been Parsed
-            playbook_base = os.path.basename(playbook)
-            if self.is_role:
-                # If Role, prepend rolename to make file unique to role
-                playbook_base = "%s/%s" % (name, playbook_base)
+            playbook_base = playbook
             # Check if this file has alread been parsed
             if playbook_base in self.already_parsed_playbooks:
                 return
@@ -113,4 +114,6 @@ class PlaybookParser(object):
                         if not task_info == False:
                             playbookentry["task_info"].append(task_info)
                 # Loop through Playbook tasks
-            self.parserdata.append(playbookentry)
+            if not folder_content in self.parserdata:
+                self.parserdata[folder_content] = list()
+            self.parserdata[folder_content].append(playbookentry)
