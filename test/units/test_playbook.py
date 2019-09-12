@@ -39,6 +39,7 @@ class TestPlaybook(unittest.TestCase):
         
         assert("task_tags" in playbook.parserdata[folder_testfile][0]['task_info'][0])
 
+
         assert(playbook.parserdata[folder_testfile][0]["is_role"] is False)
 
     def test_parser_role_playbook(self):
