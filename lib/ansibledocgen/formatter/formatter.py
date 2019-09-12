@@ -26,8 +26,8 @@ class Formatter(object):
         self.__make_host_vars__()
     
     def write_files(self):
-        for type_, content in self.render_files.iteritems():            
-            for path_content, render_file in content.iteritems():
+        for type_, content in self.render_files.items():            
+            for path_content, render_file in content.items():
                 readme_top = os.path.join(path_content, "README-TOP.md")
                 readme_bottom = os.path.join(path_content, "README-BOTTOM.md")
                 readme_top_content = ""

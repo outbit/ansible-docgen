@@ -1,9 +1,10 @@
 language: python
 # Version to Test Against
 python:
-  - "2.7"
-  - "3.3"
   - "3.4"
+  - "3.5"
+  - "3.6"
+  - "3.7"
 
 # Install Dependencies
 install:

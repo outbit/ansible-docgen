@@ -15,15 +15,15 @@ class TestDir(unittest.TestCase):
 
         # Check for expected attributes in sourcedata
         assert("playbooks" in parserdata)
-        for folder_content, sourcedata in parserdata["playbooks"].iteritems():
+        for folder_content, sourcedata in parserdata["playbooks"].items():
             assert("name" in sourcedata[0])
             assert("relative_path" in sourcedata[0])
         assert("roles" in parserdata)
-        for folder_content, sourcedata in parserdata["roles"].iteritems():
+        for folder_content, sourcedata in parserdata["roles"].items():
             assert("name" in sourcedata[0])
             assert("relative_path" in sourcedata[0])
         assert("host_vars" in parserdata)
-        for hostname, contents in parserdata["host_vars"].iteritems():
+        for hostname, contents in parserdata["host_vars"].items():
             assert("host_1" in hostname)
             assert("position" in contents)
             assert("relative_path" in contents["position"])
