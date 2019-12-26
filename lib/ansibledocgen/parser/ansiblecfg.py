@@ -60,9 +60,16 @@ class AnsibleCfg(object):
         else:
             role_paths = self.settings["roles_path"].split(":")
             role_full_paths = []
+            found_default_roles = False
             for role_path in role_paths:
                 role_full_paths.append(
                     os.path.join(self.project, role_path.strip("./")))
+            for role_path in role_full_paths:
+                if "/roles/" in role_path:
+                    found_default_roles = True
+                    break
+            if found_default_roles == False:
+                role_full_paths.append(os.path.join(self.project, "roles/"))
             return role_full_paths
 
     def get_playbook_paths(self):
