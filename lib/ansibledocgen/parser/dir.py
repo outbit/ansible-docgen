@@ -28,7 +28,7 @@ class DirParser(object):
     def get_paths(self):
         return {
             'role': self.ansiblecfg.get_role_paths(),
-            'playbook': [os.path.dirname(self.ansiblecfg.get_playbook_paths()[0])],
+            'playbooks': [self.ansiblecfg.get_playbook_paths()],
             'host': self.ansiblecfg.get_hosts_paths()
             }
         
