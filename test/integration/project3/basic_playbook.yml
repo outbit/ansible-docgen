@@ -2,8 +2,11 @@
 # description: Installs and Configured Apache
 # author: David Whiteside
 
-- name: Install apache
-  yum: name=apache2 state=installed
+- hosts: testhost
+  tasks:
 
-- name: Start apache
-  service: name=httpd state=started enabled=yes
+  - name: Install apache
+    yum: name=apache2 state=installed
+
+  - name: Start apache
+    service: name=httpd state=started enabled=yes
