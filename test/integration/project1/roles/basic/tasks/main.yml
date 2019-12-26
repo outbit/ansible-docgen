@@ -2,5 +2,5 @@
 # author: David Whiteside
 # description: Basic NGINX config
 
-- name: install nginx
+- name: install nginx from roles
   yum: name=nginx state=installed

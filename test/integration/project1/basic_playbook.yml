@@ -9,3 +9,13 @@
 
     - name: Start apache
       service: name=httpd state=started enabled=yes
+
+    - block:
+        - name: Second task in the playbook, first in the do block
+          shell: echo "PRINT TASK2"
+      rescue:
+        - name: Third task in playbook, first in the rescue block
+          shell: echo "PRINT TASK3"
+      always:
+        - name: Fourth task in playbook, first in the always block
+          shell: echo "PRINT TASK4"
