@@ -1,9 +1,0 @@
----
-- hosts: testhost
-  tasks:
-
-    - name: Install IRC
-      yum: name=unrealirc state=installed
-
-    - name: start irc
-      yum: name=unrealirc state=started

@@ -1,7 +1,0 @@
----
-# author: David Whiteside
-# description: Testing a playbook that has roles
-- hosts: testhosts
-  roles:
-    - { role: apache, tags: "apache" }
-    - { role: basic, tags: "basic" }
