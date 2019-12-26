@@ -14,18 +14,18 @@ class TestCli(unittest.TestCase):
         sys.argv.append("testdir")
         cli = Cli()
         assert(cli.project == "testdir/")
-        assert(cli.style == "markup")
+        assert(cli.style == "markdown")
 
         # Test No Path Given
         sys.argv = [sys.argv[0]]
         cli = Cli()
         assert(cli.project == "./")
-        assert(cli.style == "markup")
+        assert(cli.style == "markdown")
 
     def test_style(self):
         sys.argv = [sys.argv[0]]
         sys.argv.append("-s")
-        sys.argv.append("markup")
+        sys.argv.append("markdown")
         cli = Cli()
-        assert(cli.style == "markup")
+        assert(cli.style == "markdown")
 

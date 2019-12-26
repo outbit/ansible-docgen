@@ -19,9 +19,9 @@ class Cli(object):
                           default="./")
         parser.add_argument("-s", "--style", dest="style",
                           help="Choose the format for the documentation.\
-                          Default is markup. Example: --style=[markup]",
+                          Default is markdown. Example: --style=[markdown]",
                           metavar="STYLE",
-                          default="markup")
+                          default="markdown")
         parser.add_argument("-n", "--no-tags", dest="show_tags",                          
                           help="This option disables show tags in the documentation",
                            default=True, action='store_false')
@@ -45,12 +45,12 @@ class Cli(object):
         parserdata = self.dirparser.get_parserdata()
         
         paths = self.dirparser.get_paths()
-        if self.style == "markup":
-            self.formatter = Formatter('markup', parserdata, paths,\
+        if self.style == "markdown":
+            self.formatter = Formatter('markdown', parserdata, paths,\
                                         self.project, self.params)
             self.formatter.parse_data()
             self.formatter.write_files()
         else:
             print("Error: Use of an unsupported style.\
-                The supported styles are: markup")
+                The supported styles are: markdown")
             sys.exit(1)
