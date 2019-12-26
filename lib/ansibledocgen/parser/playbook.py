@@ -14,7 +14,7 @@ class PlaybookParser(object):
         @param is_role: is used to determine if the playbook is part of a role
         """
         self.playbooks = playbooks
-        self.parserdata = dict()
+        self.parserdata = {}
         self.is_role = is_role
         # basename of playbooks already parsed, to prevent infinate recrusion
         self.already_parsed_playbooks = []
@@ -26,8 +26,6 @@ class PlaybookParser(object):
 
     def __get_task_info__(self, task):
         '''
-        @author: Y_mil        
-        @contact: lylinquiman@gmail.com
         @param task: variable task type
         @return: {'task_name': 'xxx', 'task_tags': ['xxx' | None ]} 
             or false in case the no have the name task

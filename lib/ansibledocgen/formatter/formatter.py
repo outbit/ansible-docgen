@@ -41,12 +41,13 @@ class Formatter(object):
                     with codecs.open(readme_bottom, "r", encoding="UTF-8") as f:
                         readme_bottom_content = f.read()
                 file_dest = os.path.join(path_content, "README.md")
-                with codecs.open(file_dest, "w", encoding="utf-8") as f:
-                    f.write(readme_top_content)
-                    f.write("\n")
-                    f.write(render_file)
-                    f.write("\n")
-                    f.write(readme_bottom_content)
+                if os.path.isdir(path_content):
+                    with codecs.open(file_dest, "w", encoding="utf-8") as f:
+                        f.write(readme_top_content)
+                        f.write("\n")
+                        f.write(render_file)
+                        f.write("\n")
+                        f.write(readme_bottom_content)
                 
     def __make_playbook_template__(self):
         with open(os.path.join(self.templates_dir,self.templates_files['playbook'])) as file_:
@@ -59,17 +60,8 @@ class Formatter(object):
             template = Template(file_.read())
         for content in self.parserdata['roles']:
             self.render_files['roles'][content] = template.render(data=self.parserdata['roles'][content], params=self.params) 
-        #self.render_files['roles'] = template.render(data=self.parserdata['roles'], params=self.params) 
     
     def __make_host_vars__(self):
         with open(os.path.join(self.templates_dir,self.templates_files['host'])) as file_:
             template = Template(file_.read())
         self.render_files['host'][self.paths['host'][0]] = template.render(data=self.parserdata['host_vars'], params=self.params) 
-
-if __name__ == "__main__":
-    import cPickle
-    return_get_parserdata = cPickle.load( open('return_get_parserdata.pickle', 'rb'))
-    f = Formatter(return_get_parserdata, '/home/lautaro/rmacfgm/', {'show_tags': True})
-    #f.make_playbook_template()
-    #f.make_role_template()
-    #f.make_host_vars()

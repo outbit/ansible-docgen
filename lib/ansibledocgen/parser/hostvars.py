@@ -24,12 +24,12 @@ class HostVarsParser(object):
         @rtype: dict
         """
         for path in self.paths:
-            #path_full = os.path.join(self.paths, path)
-            for folder in os.listdir(path):
-                path_full_folder = os.path.join(path, folder)
-                host_vars = self.parse_host_vars(path_full_folder)
-                if host_vars:
-                    self.parserdata[folder] = host_vars
+            if os.path.isdir(path):
+                for folder in os.listdir(path):
+                    path_full_folder = os.path.join(path, folder)
+                    host_vars = self.parse_host_vars(path_full_folder)
+                    if host_vars:
+                        self.parserdata[folder] = host_vars
     
     def parse_host_vars(self, path):
         """
@@ -55,7 +55,6 @@ class HostVarsParser(object):
                 if file_host_var[0] == "." or 'swp' in file_host_var:
                     continue                
                 path_full = os.path.join(path, file_host_var)
-                #path_full = os.path.realpath(path_full) # Following symbolic links
                 structure[file_host_var] = {}                
                 structure[file_host_var]['relative_path'] = str(path_full)
                 with codecs.open(path_full, "r", encoding="utf-8", errors='ignore') as f:
@@ -82,6 +81,3 @@ class HostVarsParser(object):
             if len(structure) > 0:
                 return structure
         return False
-                 
-if __name__ == "__main__":
-    print(HostVarsParser('/home/lautaro/rmacfgm/host_vars').parse_hosts_vars())

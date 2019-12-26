@@ -13,12 +13,12 @@ class DirParser(object):
             @param project: is a relative or absolute path to an Ansible Project
         """
         self.ansiblecfg = AnsibleCfg(project)
-        print("Capturando roles")
+        print("Parsing roles")
         self.roleparser = RoleParser(self.ansiblecfg.get_role_paths())
-        print("Capturando playbooks")
+        print("Parsing playbooks")
         self.playbookparser = PlaybookParser(
             self.ansiblecfg.get_playbook_paths())
-        print("Capturando hosts")
+        print("Parsing hosts")
         self.hostVarsParser = HostVarsParser(self.ansiblecfg.get_hosts_paths())
 
         # Parse all playbooks

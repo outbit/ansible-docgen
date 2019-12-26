@@ -1,5 +1,4 @@
 """ Command Line Interface Module """
-#from __init__ import __version__
 import argparse
 import sys
 import os
@@ -14,8 +13,6 @@ class Cli(object):
         """ Setup Arguments and Options for CLI """
         # Parse CLI Arguments
         parser = argparse.ArgumentParser()
-#        parser.add_argument("-v", "--version", action="version",
-#            version="Ansible-docgen version: {}".format(__version__))
         parser.add_argument("-p", "--project", dest="project",
                           help="Path to Ansible project",
                           metavar="PROJECT",
