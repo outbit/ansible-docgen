@@ -29,20 +29,3 @@ class TestCli(unittest.TestCase):
         cli = Cli()
         assert(cli.style == "markup")
 
-    def test_run(self):
-        localdir = os.path.dirname(os.path.realpath(__file__))
-        projectunit = os.path.join(localdir, "../integration/projectunit")
-        sys.argv = [sys.argv[0]]
-        sys.argv.append("-p")
-        sys.argv.append(projectunit)
-        cli = Cli()
-        cli.run()
-
-        assert(os.path.isfile(os.path.join(projectunit, "README.md")))
-        assert(os.path.isfile(os.path.join(projectunit, "roles/README.md")))
-
-        assert(
-            os.path.isfile(
-                os.path.join(
-                    projectunit,
-                    "rolestest/README.md")))
