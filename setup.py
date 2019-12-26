@@ -23,13 +23,10 @@ setup(
     url='https://github.com/starboarder2001/ansible-docgen',
     license='MIT',
     install_requires=[
-        'PyYAML',
-        'setuptools',
-	'jinja2'],
-    include_package_data=True,
+        "PyYAML",
+        'setuptools'],
     package_dir={
         '': 'lib'},
-    package_data = { '': ['*.j2']},
     packages=find_packages('lib'),
     classifiers=[
         'Environment :: Console',
@@ -39,12 +36,11 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
         'Operating System :: POSIX',
-        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 2.7',
         'Topic :: System :: Installation/Setup',
         'Topic :: System :: Systems Administration',
         'Topic :: Utilities',
     ],
-    python_requires='>=3.4',
     scripts=[
         'bin/ansible-docgen',
     ],

@@ -1,17 +1,16 @@
 language: python
 # Version to Test Against
 python:
+  - "2.7"
+  - "3.3"
   - "3.4"
-  - "3.5"
-  - "3.6"
-  - "3.7"
 
 # Install Dependencies
 install:
     - pip install nose
     - pip install pyyaml
     - pip install coveralls
-    - pip install jinja2
+
 # Run Tests
 script:
     - './run_tests.sh'

@@ -9,9 +9,8 @@ class TestCli(unittest.TestCase):
 
     def test_project(self):
         # Test Specified Path
-        sys.argv = [sys.argv[0]]
-        sys.argv.append("-p")
-        sys.argv.append("testdir")
+        sys.argv[1] = "-p"
+        sys.argv[2] = "testdir"
         cli = Cli()
         assert(cli.project == "testdir/")
         assert(cli.style == "markup")
@@ -32,13 +31,13 @@ class TestCli(unittest.TestCase):
     def test_run(self):
         localdir = os.path.dirname(os.path.realpath(__file__))
         projectunit = os.path.join(localdir, "../integration/projectunit")
-        sys.argv = [sys.argv[0]]
-        sys.argv.append("-p")
-        sys.argv.append(projectunit)
+        sys.argv[1] = "-p"
+        sys.argv[2] = projectunit
         cli = Cli()
         cli.run()
 
         assert(os.path.isfile(os.path.join(projectunit, "README.md")))
+
         assert(os.path.isfile(os.path.join(projectunit, "roles/README.md")))
 
         assert(

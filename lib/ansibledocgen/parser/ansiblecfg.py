@@ -4,6 +4,7 @@ import re
 import fnmatch
 import codecs
 
+
 class AnsibleCfg(object):
     """ Parse an Ansible Config File """
 
@@ -58,7 +59,7 @@ class AnsibleCfg(object):
             return [os.path.join(self.project, "roles/")]
         else:
             role_paths = self.settings["roles_path"].split(":")
-            role_full_paths = list()
+            role_full_paths = []
             for role_path in role_paths:
                 role_full_paths.append(
                     os.path.join(self.project, role_path.strip("./")))
@@ -80,16 +81,9 @@ class AnsibleCfg(object):
                 for rolepath in self.get_role_paths():
                     if re.match(r'^%s' % rolepath, fullpath):
                         is_rolepath = True
-                
+
                 # Do not search in roles
                 if not is_rolepath:
                     playbooks.append(fullpath)
-        
+
         return playbooks
-    
-    def get_hosts_paths(self):
-        """ Get host vars Paths Base on Ansible Config 
-        @return: host_vars path base
-        @rtype: list
-        """
-        return [os.path.join(self.project, "host_vars")]
