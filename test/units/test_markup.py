@@ -1,5 +1,5 @@
 import nose
-from ansibledocgen.formatter.markup import MarkupFormatter
+from ansibledocgen.formatter.formatter import Formatter
 import unittest
 import sys
 import os
@@ -8,6 +8,5 @@ import os
 class TestMarkup(unittest.TestCase):
 
     def test_all(self):
-        localdir = os.path.dirname(os.path.realpath(__file__))
-        projectunit = os.path.join(localdir, "../integration/projectunit")
         # TODO
+        pass
