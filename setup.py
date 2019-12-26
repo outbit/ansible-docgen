@@ -44,7 +44,7 @@ setup(
         'Topic :: System :: Systems Administration',
         'Topic :: Utilities',
     ],
-    python_requires='>=3.4',
+    python_requires='>=2.7',
     scripts=[
         'bin/ansible-docgen',
     ],
