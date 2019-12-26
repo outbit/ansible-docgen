@@ -1,0 +1,11 @@
+---
+# author: David Whiteside
+# description: Advanced NGINX config
+
+- name: install nginx
+  yum: name=nginx state=installed
+
+- name: start nginx
+  service: name=nginx state=started
+
+- include: "doextra.yml"
