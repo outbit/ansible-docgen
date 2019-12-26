@@ -24,24 +24,36 @@ class PlaybookParser(object):
         for playbook in self.playbooks:
             self.parse_playbook(playbook)
 
-    def __get_task_info__(self, task):
+    def __get_task_info__(self, tasks):
         '''
-        @param task: variable task type
+        @param tasks: variable task type
         @return: {'task_name': 'xxx', 'task_tags': ['xxx' | None ]} 
-            or false in case the no have the name task
-        @rtype: dict or boolean
+            or false in case the no have the name tasks
+        @rtype: list of dicts
         This Function go through all task and create the dict with task name \ 
         and tags. In this function is possibly adding more variables.        
         '''
-        if "name" in task:
-            task_info = {'task_name': None, 'task_tags': None}
-            task_name = task["name"]            
-            task_info["task_name"] = task_name
-            if "tags" in task:
-                if not task["tags"] == None:
-                    task_info["task_tags"] = task["tags"]
-            return task_info
-        return False
+        task_info_list = []
+        if isinstance(tasks, list):
+            for task in tasks:
+                task_info_list += self.__get_task_info__(task)
+        else:
+            if "name" in tasks:
+                task_info = {'task_name': None, 'task_tags': None}
+                task_name = tasks["name"]
+                task_info["task_name"] = task_name
+                if "tags" in tasks:
+                    if not tasks["tags"] == None:
+                        task_info["task_tags"] = tasks["tags"]
+                task_info_list.append(task_info)
+            if "always" in tasks:
+                task_info_list += self.__get_task_info__(tasks["always"])
+            if "block" in tasks:
+                task_info_list += self.__get_task_info__(tasks["block"])
+            if "rescue" in tasks:
+                task_info_list += self.__get_task_info__(tasks["rescue"])
+
+        return task_info_list
     
     def parse_playbook(self, playbook):
         """ Parse an Individual Playbook """
@@ -95,23 +107,16 @@ class PlaybookParser(object):
                 return
 
             # Parase the Yaml
-            for task in yamldata:
+            for yaml_item in yamldata:
+                tasks = yaml_item
                 # Playbooks have a tasks dict key
-                if "tasks" in task:
-                    task = task["tasks"]
-                # Loop through Role tasks
-                if isinstance(task, dict) and self.is_role:
-                    task_info = self.__get_task_info__(task)
-                    if not task_info == False:
-                        playbookentry["task_info"].append(task_info)
+                if "tasks" in yaml_item:
+                    tasks = yaml_item["tasks"]
+                # Loop through tasks
+                task_info = self.__get_task_info__(tasks)
+                if len(task_info) > 0:
+                    playbookentry["task_info"] += task_info
                 # Loop through Playbook tasks
-                elif isinstance(task, list) and not self.is_role:
-                    tasks = task
-                    for task in tasks:
-                        task_info = self.__get_task_info__(task)
-                        if not task_info == False:
-                            playbookentry["task_info"].append(task_info)
-                # Loop through Playbook tasks
-            if not folder_content in self.parserdata:
-                self.parserdata[folder_content] = list()
+            if folder_content not in self.parserdata:
+                self.parserdata[folder_content] = []
             self.parserdata[folder_content].append(playbookentry)

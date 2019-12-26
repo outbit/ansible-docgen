@@ -13,6 +13,12 @@
 
 > **Task:** Start apache
 
+> **Task:** Fourth task in playbook, first in the always block
+
+> **Task:** Second task in the playbook, first in the do block
+
+> **Task:** Third task in playbook, first in the rescue block
+
 ## Playbook: [basic_playbook_utf8.yml](basic_playbook_utf8.yml)
 > **Author:** David Whiteside شيشه ب
 
