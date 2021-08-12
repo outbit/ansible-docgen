@@ -1,5 +1,5 @@
 """ Playbook Module """
-import yaml
+from ansibledocgen.core.docgenyaml import DocGenYaml
 import re
 import os
 import codecs
@@ -101,7 +101,7 @@ class PlaybookParser(object):
                         playbookentry[attribute.lower()] = value
 
             # Parse Task Names from playbook
-            yamldata = yaml.load(data, Loader=yaml.SafeLoader)
+            yamldata = DocGenYaml.load(data)
             # Skip Empty YAML Files
             if yamldata is None:
                 return
