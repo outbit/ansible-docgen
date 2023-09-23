@@ -7,7 +7,7 @@ python:
 
 # Install Dependencies
 install:
-    - pip install nose
+    - pip install pytest
     - pip install pyyaml
     - pip install coveralls
     - pip install jinja2
