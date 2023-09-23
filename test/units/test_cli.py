@@ -1,4 +1,3 @@
-import nose
 from ansibledocgen.cli import Cli
 import unittest
 import sys
