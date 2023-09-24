@@ -6,7 +6,7 @@ Description
 
 ansible-docgen generates documentation from annotated Ansible Playbooks and Roles.
 
-[![Build Status](https://secure.travis-ci.org/thedavidwhiteside/ansible-docgen.png?branch=master "ansible-docs latest build")](http://travis-ci.org/thedavidwhiteside/ansible-docgen)
+[![Build Status](https://app.travis-ci.com/thedavidwhiteside/ansible-docgen.svg?branch=develop "ansible-docs latest build")](http://travis-ci.org/thedavidwhiteside/ansible-docgen)
 [![PIP Version](https://img.shields.io/pypi/v/ansible-docgen.svg "ansible-docs PyPI version")](https://pypi.python.org/pypi/ansible-docgen)
 [![Coverage Status](https://coveralls.io/repos/thedavidwhiteside/ansible-docgen/badge.svg?branch=develop&service=github)](https://coveralls.io/github/thedavidwhiteside/ansible-docgen?branch=develop)
 [![Gitter IM](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/thedavidwhiteside/ansible-docgen)
