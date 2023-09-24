@@ -6,6 +6,12 @@ from ansibledocgen.parser.dir import DirParser
 from ansibledocgen.formatter.formatter import Formatter
 
 
+def main():
+    cli = Cli()
+    cli.run()
+    sys.exit(0)
+
+
 class Cli(object):
     """ Command Line Interface for ansible-docgen """
 

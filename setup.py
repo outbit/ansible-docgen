@@ -52,8 +52,10 @@ setup(
         'Topic :: Utilities',
     ],
     python_requires='>=3.7',
-    scripts=[
-        'bin/ansible-docgen',
-    ],
+    entry_points={
+        'console_scripts': [
+          'ansible-docgen = ansibledocgen.cli:main'
+        ]
+    },
     data_files=[],
 )
