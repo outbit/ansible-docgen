@@ -4,6 +4,7 @@ import sys
 import os
 from ansibledocgen.parser.dir import DirParser
 from ansibledocgen.formatter.formatter import Formatter
+from ansibledocgen import __version__
 
 
 def main():
@@ -28,15 +29,20 @@ class Cli(object):
                           Default is markdown. Example: --style=[markdown]",
                           metavar="STYLE",
                           default="markdown")
-        parser.add_argument("-n", "--no-tags", dest="show_tags",                          
+        parser.add_argument("-n", "--no-tags", dest="show_tags",
                           help="This option disables show tags in the documentation",
                            default=True, action='store_false')
+        parser.add_argument("-v", "--version", dest="show_version",
+                          help="Print version",
+                           default=False, action='store_true')
+
         args = parser.parse_args()
         # Make sure there is a trailing /
         self.project = os.path.join(args.project, "")
         self.style = args.style
         self.params = {}
         self.params['show_tags'] = args.show_tags
+        self.params['show_version'] = args.show_version
 
         # Used to Parse Roles and Playbooks
         self.dirparser = None
@@ -44,6 +50,11 @@ class Cli(object):
 
     def run(self):
         """ EntryPoint Of Application """
+        # Print version
+        if self.params['show_version']:
+            print(f"ansible-docgen version: {__version__}")
+            sys.exit(0)
+
         # Parse Project for Roles and Playbooks
         self.dirparser = DirParser(self.project)
 
