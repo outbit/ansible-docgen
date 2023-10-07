@@ -6,6 +6,10 @@ import sys
 sys.path.insert(0, os.path.abspath('lib'))
 from ansibledocgen import __version__, __author__
 
+from pathlib import Path
+this_directory = Path(__file__).parent
+long_description = (this_directory / "README.md").read_text()
+
 try:
     from setuptools import setup, find_packages
 except ImportError:
@@ -18,6 +22,8 @@ setup(
     name='ansible-docgen',
     version=__version__,
     description='Generate Documentation from Annotated Ansible Playbooks and Roles',
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     author=__author__,
     author_email='david@davidwhiteside.com',
     url='https://github.com/starboarder2001/ansible-docgen',
