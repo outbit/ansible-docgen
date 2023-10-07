@@ -1,3 +1,19 @@
+Build new release
+===
+
+```bash
+git checkout master
+git merge develop --no-ff
+git push
+git tag vX.Y.Z
+git push origin vX.Y.Z
+```
+
+- Publish a release on github.com
+
+Follow instructions to build and publish to pypi
+===
+
 ```bash
 # Setup your ~/.pypirc
 [distutils]
