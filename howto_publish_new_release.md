@@ -3,7 +3,7 @@ Test locally
 
 ```bash
 $ python -m pip install -e .
-$ cd test/integrations/project1/ && ansible-docgen
+$ cd test/integration/project1/ && ansible-docgen
 ```
 
 Build new release
