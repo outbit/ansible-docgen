@@ -25,7 +25,7 @@ class Cli(object):
                           metavar="PROJECT",
                           default="./")
         parser.add_argument("-f", "--filename", dest="filename",
-                          help="filename used for the documentation file. Default is README",
+                          help="filename used for the output documentation file. Default is README",
                           metavar="FILENAME",
                           default="README")
         parser.add_argument("-s", "--style", dest="style",

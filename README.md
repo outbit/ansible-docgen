@@ -73,6 +73,22 @@ Usage
 
 `Generated Markup File` [README.md](test/integration/project1/README.md)
 
+##### Help output
+```bash
+usage: ansible-docgen [-h] [-p PROJECT] [-f FILENAME] [-s STYLE] [-n] [-v]
+
+options:
+  -h, --help            show this help message and exit
+  -p PROJECT, --project PROJECT
+                        Path to Ansible project. Default is the current directory.
+  -f FILENAME, --filename FILENAME
+                        filename used for the output documentation file. Default is README
+  -s STYLE, --style STYLE
+                        Choose the format for the documentation. Default is markdown. Example: --style=[markdown]
+  -n, --no-tags         This option disables show tags in the documentation
+  -v, --version         Print version
+  ```
+
 License
 =======
 
