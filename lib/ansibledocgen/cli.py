@@ -24,6 +24,10 @@ class Cli(object):
                           help="Path to Ansible project",
                           metavar="PROJECT",
                           default="./")
+        parser.add_argument("-f", "--filename", dest="filename",
+                          help="filename used for the documentation file",
+                          metavar="FILENAME",
+                          default="README")
         parser.add_argument("-s", "--style", dest="style",
                           help="Choose the format for the documentation.\
                           Default is markdown. Example: --style=[markdown]",
@@ -39,6 +43,7 @@ class Cli(object):
         args = parser.parse_args()
         # Make sure there is a trailing /
         self.project = os.path.join(args.project, "")
+        self.filename, file_extension = os.path.splitext(args.filename)
         self.style = args.style
         self.params = {}
         self.params['show_tags'] = args.show_tags
@@ -66,7 +71,7 @@ class Cli(object):
             self.formatter = Formatter('markdown', parserdata, paths,\
                                         self.project, self.params)
             self.formatter.parse_data()
-            self.formatter.write_files()
+            self.formatter.write_files(self.filename)
         else:
             print("Error: Use of an unsupported style.\
                 The supported styles are: markdown")

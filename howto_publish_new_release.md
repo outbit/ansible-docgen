@@ -1,3 +1,11 @@
+Test locally
+===
+
+```bash
+$ python -m pip install -e .
+$ ansible-docgen
+```
+
 Build new release
 ===
 

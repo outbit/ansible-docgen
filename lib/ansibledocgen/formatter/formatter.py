@@ -25,7 +25,7 @@ class Formatter(object):
         self.__make_role_template__()
         self.__make_host_vars__()
     
-    def write_files(self):
+    def write_files(self, filename="README"):
         for type_, content in self.render_files.items():            
             for path_content, render_file in content.items():
                 readme_top = os.path.join(path_content, "README-TOP.md")
@@ -40,7 +40,7 @@ class Formatter(object):
                 if os.path.exists(readme_bottom):
                     with codecs.open(readme_bottom, "r", encoding="UTF-8") as f:
                         readme_bottom_content = f.read()
-                file_dest = os.path.join(path_content, "README.md")
+                file_dest = os.path.join(path_content, f"{filename}.md")
                 if os.path.isdir(path_content):
                     with codecs.open(file_dest, "w", encoding="utf-8") as f:
                         f.write(readme_top_content)
