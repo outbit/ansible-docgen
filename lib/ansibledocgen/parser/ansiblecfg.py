@@ -79,6 +79,8 @@ class AnsibleCfg(object):
 
         # Find all .yml files in the project directory
         for root, dirnames, filenames in os.walk(self.project):
+            filenames.sort()
+            dirnames.sort()
             for filename in fnmatch.filter(filenames, '*.yml'):
                 # Absolute path to file
                 fullpath = os.path.join(root, filename)

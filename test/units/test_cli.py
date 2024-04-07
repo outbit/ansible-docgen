@@ -28,3 +28,9 @@ class TestCli(unittest.TestCase):
         cli = Cli()
         assert(cli.style == "markdown")
 
+    def test_filename(self):
+        sys.argv = [sys.argv[0]]
+        sys.argv.append("-f")
+        sys.argv.append("test_filename.md")
+        cli = Cli()
+        assert(cli.filename == "test_filename")
