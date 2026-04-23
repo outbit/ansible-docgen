@@ -1,4 +1,3 @@
-import nose
 from ansibledocgen.formatter.formatter import Formatter
 import unittest
 import sys

@@ -1,4 +1,3 @@
-import nose
 from ansibledocgen.parser.dir import DirParser
 import unittest
 import sys
