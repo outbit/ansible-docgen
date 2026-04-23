@@ -1,4 +1,3 @@
-import nose
 from ansibledocgen.parser.role import RoleParser
 import unittest
 import sys
