@@ -6,7 +6,11 @@ on:
       - develop
 
 jobs:
+  test:
+    uses: ./.github/workflows/tests.yml
+
   deploy:
+    needs: test
     runs-on: ubuntu-latest
     environment: stage
     permissions:
