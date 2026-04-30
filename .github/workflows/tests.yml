@@ -23,9 +23,9 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Install dependencies
-        run: pip install pyyaml jinja2 coverage
+        run: pip install .
 
       - name: Run tests
         run: |
           export PYTHONPATH="${PYTHONPATH}:./lib"
-          coverage run --source=ansibledocgen -m unittest discover test/units/
+          python -m unittest discover test/units/
