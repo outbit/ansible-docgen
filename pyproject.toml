@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ansible-docgen"
+version = "1.0.0"
+description = "Generate Documentation from Annotated Ansible Playbooks and Roles"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "David Whiteside", email = "david@davidwhiteside.com" }]
+requires-python = ">=3.10"
+dependencies = [
+    "PyYAML",
+    "setuptools",
+    "jinja2",
+]
+classifiers = [
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: POSIX",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: System :: Installation/Setup",
+    "Topic :: System :: Systems Administration",
+    "Topic :: Utilities",
+]
+
+[project.urls]
+Homepage = "https://github.com/starboarder2001/ansible-docgen"
+
+[project.scripts]
+ansible-docgen = "ansibledocgen.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["lib"]
+
+[tool.setuptools.package-data]
+"*" = ["*.j2"]
