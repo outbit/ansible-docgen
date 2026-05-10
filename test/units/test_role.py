@@ -1,14 +1,7 @@
-import unittest
 from pathlib import Path
 from ansibledocgen.parser.role import RoleParser
 
 INTEGRATION = Path(__file__).parent.parent / "integration"
-
-
-class TestRole(unittest.TestCase):
-    def test_all(self):
-        # TODO
-        pass
 
 
 def test_finds_role_main_tasks():

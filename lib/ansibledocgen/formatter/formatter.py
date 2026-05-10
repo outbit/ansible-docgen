@@ -2,6 +2,16 @@ from pathlib import Path
 from jinja2 import Template
 
 
+def apply_ignore_attrs(entry: dict, ignore_attrs: list[str]) -> dict:
+    filtered = dict(entry)
+    for attr in ignore_attrs:
+        if attr == "task":
+            filtered["task_info"] = []
+        else:
+            filtered.pop(attr, None)
+    return filtered
+
+
 class Formatter:
     def __init__(
         self, style: str, parserdata: dict, paths: dict, project: str, params: dict
@@ -51,6 +61,10 @@ class Formatter:
                         encoding="utf-8",
                     )
 
+    def _filter_data(self, entries: list[dict]) -> list[dict]:
+        ignore_attrs = self.params.get("ignore_attrs", [])
+        return [apply_ignore_attrs(e, ignore_attrs) for e in entries]
+
     def _make_playbook_template(self) -> None:
         template = Template(
             (self.templates_dir / self.templates_files["playbook"]).read_text(
@@ -59,7 +73,8 @@ class Formatter:
         )
         for content in self.parserdata["playbooks"]:
             self.render_files["playbook"][content] = template.render(
-                data=self.parserdata["playbooks"][content], params=self.params
+                data=self._filter_data(self.parserdata["playbooks"][content]),
+                params=self.params,
             )
 
     def _make_role_template(self) -> None:
@@ -70,7 +85,8 @@ class Formatter:
         )
         for content in self.parserdata["roles"]:
             self.render_files["roles"][content] = template.render(
-                data=self.parserdata["roles"][content], params=self.params
+                data=self._filter_data(self.parserdata["roles"][content]),
+                params=self.params,
             )
 
     def _make_host_vars(self) -> None:

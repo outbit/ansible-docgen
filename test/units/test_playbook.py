@@ -1,67 +1,67 @@
-import unittest
 import os
+import shutil
 from pathlib import Path
 from ansibledocgen.parser.playbook import PlaybookParser
 
 INTEGRATION = Path(__file__).parent.parent / "integration"
 
 
-class TestPlaybook(unittest.TestCase):
-    def test_parser_playbook(self):
-        localdir = os.path.dirname(os.path.realpath(__file__))
-        testfile = os.path.join(localdir, ".output/testplaybook.yml")
-        folder_testfile = os.path.join(localdir, ".output")
-        Path(testfile).write_text(
-            "---\n"
-            "# Author: Me شيشه ب\n"
-            "# description: this is a test شيشه ب\n"
-            "- hosts: testhoشيشهsts\n"
-            "  tasks:\n"
-            "     - name: 'Install Apache شيشه ب'\n"
-            "       yum: name=httpd state=inشtalled\n"
-            "       tags:\n"
-            "           - apache\n",
-            encoding="utf-8",
-        )
+def test_parser_playbook():
+    localdir = os.path.dirname(os.path.realpath(__file__))
+    testfile = os.path.join(localdir, ".output/testplaybook.yml")
+    folder_testfile = os.path.join(localdir, ".output")
+    Path(testfile).write_text(
+        "---\n"
+        "# Author: Me شيشه ب\n"
+        "# description: this is a test شيشه ب\n"
+        "- hosts: testhoشيشهsts\n"
+        "  tasks:\n"
+        "     - name: 'Install Apache شيشه ب'\n"
+        "       yum: name=httpd state=inشtalled\n"
+        "       tags:\n"
+        "           - apache\n",
+        encoding="utf-8",
+    )
 
-        playbook = PlaybookParser([testfile], is_role=False)
-        playbook.parse_playbooks()
+    playbook = PlaybookParser([testfile], is_role=False)
+    playbook.parse_playbooks()
 
-        assert len(playbook.parserdata) == 1
-        assert "author" in playbook.parserdata[folder_testfile][0]
-        assert "description" in playbook.parserdata[folder_testfile][0]
-        assert "task_info" in playbook.parserdata[folder_testfile][0]
-        assert "task_name" in playbook.parserdata[folder_testfile][0]["task_info"][0]
-        assert "task_tags" in playbook.parserdata[folder_testfile][0]["task_info"][0]
-        assert playbook.parserdata[folder_testfile][0]["is_role"] is False
+    assert len(playbook.parserdata) == 1
+    assert "author" in playbook.parserdata[folder_testfile][0]
+    assert "description" in playbook.parserdata[folder_testfile][0]
+    assert "task_info" in playbook.parserdata[folder_testfile][0]
+    assert "task_name" in playbook.parserdata[folder_testfile][0]["task_info"][0]
+    assert "task_tags" in playbook.parserdata[folder_testfile][0]["task_info"][0]
+    assert playbook.parserdata[folder_testfile][0]["is_role"] is False
 
-    def test_parser_role_playbook(self):
-        localdir = os.path.dirname(os.path.realpath(__file__))
-        tasks_dir = Path(localdir) / ".output" / "tasks"
-        tasks_dir.mkdir(parents=True, exist_ok=True)
-        testfile = str(tasks_dir / "main.yml")
-        folder_testfile = localdir
-        Path(testfile).write_text(
-            "---\n"
-            "# Author: Me\n"
-            "# description: this is a test\n"
-            "- name: 'Install Apache'\n"
-            "  yum: name=httpd state=installed\n"
-            "  tags:\n"
-            "    - apache\n",
-            encoding="utf-8",
-        )
 
-        playbook = PlaybookParser([testfile], is_role=True)
-        playbook.parse_playbooks()
+def test_parser_role_playbook():
+    localdir = os.path.dirname(os.path.realpath(__file__))
+    tasks_dir = Path(localdir) / ".output" / "tasks"
+    tasks_dir.mkdir(parents=True, exist_ok=True)
+    testfile = str(tasks_dir / "main.yml")
+    folder_testfile = localdir
+    Path(testfile).write_text(
+        "---\n"
+        "# Author: Me\n"
+        "# description: this is a test\n"
+        "- name: 'Install Apache'\n"
+        "  yum: name=httpd state=installed\n"
+        "  tags:\n"
+        "    - apache\n",
+        encoding="utf-8",
+    )
 
-        assert len(playbook.parserdata) == 1
-        assert "author" in playbook.parserdata[folder_testfile][0]
-        assert "description" in playbook.parserdata[folder_testfile][0]
-        assert "task_info" in playbook.parserdata[folder_testfile][0]
-        assert "task_name" in playbook.parserdata[folder_testfile][0]["task_info"][0]
-        assert "task_tags" in playbook.parserdata[folder_testfile][0]["task_info"][0]
-        assert playbook.parserdata[folder_testfile][0]["name"] == ".output"
+    playbook = PlaybookParser([testfile], is_role=True)
+    playbook.parse_playbooks()
+
+    assert len(playbook.parserdata) == 1
+    assert "author" in playbook.parserdata[folder_testfile][0]
+    assert "description" in playbook.parserdata[folder_testfile][0]
+    assert "task_info" in playbook.parserdata[folder_testfile][0]
+    assert "task_name" in playbook.parserdata[folder_testfile][0]["task_info"][0]
+    assert "task_tags" in playbook.parserdata[folder_testfile][0]["task_info"][0]
+    assert playbook.parserdata[folder_testfile][0]["name"] == ".output"
 
 
 def test_author_and_description_parsed(tmp_path):
@@ -168,8 +168,6 @@ def test_task_tags_stored(tmp_path):
 
 def test_real_playbook_with_blocks(tmp_path):
     src = INTEGRATION / "project1" / "basic_playbook.yml"
-    import shutil
-
     dest = tmp_path / "basic_playbook.yml"
     shutil.copy(src, dest)
     parser = PlaybookParser([str(dest)])

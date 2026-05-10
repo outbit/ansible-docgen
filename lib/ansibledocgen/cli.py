@@ -52,6 +52,14 @@ class Cli:
             action="store_false",
         )
         parser.add_argument(
+            "-i",
+            "--ignore",
+            dest="ignore_attrs",
+            help="Comma-separated list of attributes to ignore in the output. Example: -i author,task",
+            metavar="IGNORE",
+            default="",
+        )
+        parser.add_argument(
             "-v",
             "--version",
             dest="show_version",
@@ -64,9 +72,11 @@ class Cli:
         self.project = os.path.join(args.project, "")
         self.filename, _ = os.path.splitext(args.filename)
         self.style = args.style
+        ignore_attrs = [a.strip() for a in args.ignore_attrs.split(",") if a.strip()]
         self.params = {
             "show_tags": args.show_tags,
             "show_version": args.show_version,
+            "ignore_attrs": ignore_attrs,
         }
         self.dirparser: DirParser | None = None
         self.formatter: Formatter | None = None
