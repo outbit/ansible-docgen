@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ansible-docgen"
-version = "1.0.1"
+version = "1.1.0"
 description = "Generate Documentation from Annotated Ansible Playbooks and Roles"
 readme = "README.md"
 license = { text = "MIT" }
@@ -40,7 +40,7 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/starboarder2001/ansible-docgen"
+Homepage = "https://github.com/outbit/ansible-docgen"
 
 [project.scripts]
 ansible-docgen = "ansibledocgen.cli:main"
