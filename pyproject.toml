@@ -12,7 +12,6 @@ authors = [{ name = "David Whiteside", email = "david@davidwhiteside.com" }]
 requires-python = ">=3.10"
 dependencies = [
     "PyYAML",
-    "setuptools",
     "jinja2",
 ]
 classifiers = [
@@ -34,6 +33,12 @@ classifiers = [
     "Topic :: Utilities",
 ]
 
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "ruff",
+]
+
 [project.urls]
 Homepage = "https://github.com/starboarder2001/ansible-docgen"
 
@@ -45,3 +50,6 @@ where = ["lib"]
 
 [tool.setuptools.package-data]
 "*" = ["*.j2"]
+
+[tool.ruff.lint]
+ignore = ["E501"]

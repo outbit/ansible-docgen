@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -e
+
+if ! command -v ruff &>/dev/null; then
+    echo "ruff not found. Install it with: pip install ruff"
+    exit 1
+fi
+
+ruff format --check lib/ test/
+ruff check lib/ test/
