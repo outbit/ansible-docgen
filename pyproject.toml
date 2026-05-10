@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ansible-docgen"
-version = "1.0.1"
+version = "1.1.0"
 description = "Generate Documentation from Annotated Ansible Playbooks and Roles"
 readme = "README.md"
 license = { text = "MIT" }
@@ -12,7 +12,6 @@ authors = [{ name = "David Whiteside", email = "david@davidwhiteside.com" }]
 requires-python = ">=3.10"
 dependencies = [
     "PyYAML",
-    "setuptools",
     "jinja2",
 ]
 classifiers = [
@@ -34,8 +33,14 @@ classifiers = [
     "Topic :: Utilities",
 ]
 
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "ruff",
+]
+
 [project.urls]
-Homepage = "https://github.com/starboarder2001/ansible-docgen"
+Homepage = "https://github.com/outbit/ansible-docgen"
 
 [project.scripts]
 ansible-docgen = "ansibledocgen.cli:main"
@@ -45,3 +50,10 @@ where = ["lib"]
 
 [tool.setuptools.package-data]
 "*" = ["*.j2"]
+
+[tool.pytest.ini_options]
+testpaths = ["test/units"]
+pythonpath = ["lib"]
+
+[tool.ruff.lint]
+ignore = ["E501"]

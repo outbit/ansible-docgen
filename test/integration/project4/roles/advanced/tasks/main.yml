@@ -1,0 +1,9 @@
+---
+# author: David Whiteside
+# description: Advanced NGINX security config
+
+- name: configure firewall for nginx
+  firewalld: service=http permanent=yes state=enabled
+
+- name: enable nginx selinux policy
+  seboolean: name=httpd_can_network_connect state=yes persistent=yes
