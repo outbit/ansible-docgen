@@ -1,7 +1,7 @@
 from jinja2 import Template
 import os
 import codecs
-class Formatter(object):
+class Formatter:
     def __init__(self, style, parserdata, paths, project, params):
         
         self.parserdata = parserdata

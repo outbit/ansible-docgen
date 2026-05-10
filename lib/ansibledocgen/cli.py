@@ -13,7 +13,7 @@ def main():
     sys.exit(0)
 
 
-class Cli(object):
+class Cli:
     """ Command Line Interface for ansible-docgen """
 
     def __init__(self):

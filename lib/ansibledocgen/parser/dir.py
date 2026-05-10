@@ -5,7 +5,7 @@ from ansibledocgen.parser.role import RoleParser
 from ansibledocgen.parser.hostvars import HostVarsParser
 import os
 
-class DirParser(object):
+class DirParser:
     """ Parses an Ansible Project Directory Structure """
 
     def __init__(self, project):

@@ -5,7 +5,7 @@ import fnmatch
 import codecs
 
 
-class AnsibleCfg(object):
+class AnsibleCfg:
     """ Parse an Ansible Config File """
 
     def __init__(self, project):

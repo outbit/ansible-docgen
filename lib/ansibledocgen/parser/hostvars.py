@@ -5,7 +5,7 @@ import os
 import codecs
 
 
-class HostVarsParser(object):
+class HostVarsParser:
     def __init__(self, paths):
         """
         @param paths: list of paths with hosts

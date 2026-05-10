@@ -5,7 +5,7 @@ import fnmatch
 import re
 
 
-class RoleParser(object):
+class RoleParser:
     """ Parse Roles in Project """
 
     def __init__(self, role_paths):

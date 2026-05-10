@@ -1,7 +1,7 @@
 import yaml
 
 
-class DocGenYaml(object):
+class DocGenYaml:
     @staticmethod
     def load(data):
         def vault_constructor(loader, node):

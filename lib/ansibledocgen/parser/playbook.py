@@ -5,7 +5,7 @@ import os
 import codecs
 
 
-class PlaybookParser(object):
+class PlaybookParser:
     """ Parse An Individual Playbook """
 
     def __init__(self, playbooks, is_role=False):
