@@ -1,67 +1,84 @@
+from pathlib import Path
 from jinja2 import Template
-import os
-import codecs
+
+
 class Formatter:
-    def __init__(self, style, parserdata, paths, project, params):
-        
+    def __init__(
+        self, style: str, parserdata: dict, paths: dict, project: str, params: dict
+    ) -> None:
         self.parserdata = parserdata
         self.paths = paths
         self.project = project
         self.params = params
-        self.render_files = dict(
-            playbook=dict(),
-            roles=dict(),
-            host=dict()
-           ) 
-        self.templates_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
+        self.render_files: dict[str, dict[str, str]] = dict(
+            playbook=dict(), roles=dict(), host=dict()
+        )
+        self.templates_dir = Path(__file__).parent / "templates"
         self.templates_files = {
-                "playbook": "{}_playbook.j2".format(style),
-                "role": "{}_role.j2".format(style),
-                "host": "{}_host.j2".format(style)
-            }
-        
-    def parse_data(self):
-        self.__make_playbook_template__()
-        self.__make_role_template__()
-        self.__make_host_vars__()
-    
-    def write_files(self, filename="README"):
-        for type_, content in self.render_files.items():            
+            "playbook": f"{style}_playbook.j2",
+            "role": f"{style}_role.j2",
+            "host": f"{style}_host.j2",
+        }
+
+    def parse_data(self) -> None:
+        self._make_playbook_template()
+        self._make_role_template()
+        self._make_host_vars()
+
+    def write_files(self, filename: str = "README") -> None:
+        for type_, content in self.render_files.items():
             for path_content, render_file in content.items():
-                readme_top = os.path.join(path_content, "README-TOP.md")
-                readme_bottom = os.path.join(path_content, "README-BOTTOM.md")
-                readme_top_content = ""
-                readme_bottom_content = ""
-                ''' README-TOP: if this file exists it's concatenated at the top of 
-                    README.md created by ansibledocgen'''
-                if os.path.exists(readme_top):
-                    with codecs.open(readme_top, "r", encoding="UTF-8") as f:
-                        readme_top_content = f.read()
-                if os.path.exists(readme_bottom):
-                    with codecs.open(readme_bottom, "r", encoding="UTF-8") as f:
-                        readme_bottom_content = f.read()
-                file_dest = os.path.join(path_content, f"{filename}.md")
-                if os.path.isdir(path_content):
-                    with codecs.open(file_dest, "w", encoding="utf-8") as f:
-                        f.write(readme_top_content)
-                        f.write("\n")
-                        f.write(render_file)
-                        f.write("\n")
-                        f.write(readme_bottom_content)
-                
-    def __make_playbook_template__(self):
-        with open(os.path.join(self.templates_dir,self.templates_files['playbook'])) as file_:
-            template = Template(file_.read())
-        for content in self.parserdata['playbooks']:
-            self.render_files['playbook'][content] = template.render(data=self.parserdata['playbooks'][content], params=self.params) 
-    
-    def __make_role_template__(self):
-        with open(os.path.join(self.templates_dir,self.templates_files['role'])) as file_:
-            template = Template(file_.read())
-        for content in self.parserdata['roles']:
-            self.render_files['roles'][content] = template.render(data=self.parserdata['roles'][content], params=self.params) 
-    
-    def __make_host_vars__(self):
-        with open(os.path.join(self.templates_dir,self.templates_files['host'])) as file_:
-            template = Template(file_.read())
-        self.render_files['host'][self.paths['host'][0]] = template.render(data=self.parserdata['host_vars'], params=self.params) 
+                path_obj = Path(path_content)
+                readme_top = path_obj / "README-TOP.md"
+                readme_bottom = path_obj / "README-BOTTOM.md"
+                readme_top_content = (
+                    readme_top.read_text(encoding="utf-8")
+                    if readme_top.exists()
+                    else ""
+                )
+                readme_bottom_content = (
+                    readme_bottom.read_text(encoding="utf-8")
+                    if readme_bottom.exists()
+                    else ""
+                )
+                if path_obj.is_dir():
+                    (path_obj / f"{filename}.md").write_text(
+                        readme_top_content
+                        + "\n"
+                        + render_file
+                        + "\n"
+                        + readme_bottom_content,
+                        encoding="utf-8",
+                    )
+
+    def _make_playbook_template(self) -> None:
+        template = Template(
+            (self.templates_dir / self.templates_files["playbook"]).read_text(
+                encoding="utf-8"
+            )
+        )
+        for content in self.parserdata["playbooks"]:
+            self.render_files["playbook"][content] = template.render(
+                data=self.parserdata["playbooks"][content], params=self.params
+            )
+
+    def _make_role_template(self) -> None:
+        template = Template(
+            (self.templates_dir / self.templates_files["role"]).read_text(
+                encoding="utf-8"
+            )
+        )
+        for content in self.parserdata["roles"]:
+            self.render_files["roles"][content] = template.render(
+                data=self.parserdata["roles"][content], params=self.params
+            )
+
+    def _make_host_vars(self) -> None:
+        template = Template(
+            (self.templates_dir / self.templates_files["host"]).read_text(
+                encoding="utf-8"
+            )
+        )
+        self.render_files["host"][self.paths["host"][0]] = template.render(
+            data=self.parserdata["host_vars"], params=self.params
+        )

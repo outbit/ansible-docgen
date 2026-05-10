@@ -1,11 +1,9 @@
 from ansibledocgen.parser.dir import DirParser
 import unittest
-import sys
 import os
 
 
 class TestDir(unittest.TestCase):
-
     def test_parserdata(self):
         localdir = os.path.dirname(os.path.realpath(__file__))
         projectunit = os.path.join(localdir, "../integration/projectunit")
@@ -13,16 +11,16 @@ class TestDir(unittest.TestCase):
         parserdata = dirparser.get_parserdata()
 
         # Check for expected attributes in sourcedata
-        assert("playbooks" in parserdata)
+        assert "playbooks" in parserdata
         for folder_content, sourcedata in parserdata["playbooks"].items():
-            assert("name" in sourcedata[0])
-            assert("relative_path" in sourcedata[0])
-        assert("roles" in parserdata)
+            assert "name" in sourcedata[0]
+            assert "relative_path" in sourcedata[0]
+        assert "roles" in parserdata
         for folder_content, sourcedata in parserdata["roles"].items():
-            assert("name" in sourcedata[0])
-            assert("relative_path" in sourcedata[0])
-        assert("host_vars" in parserdata)
+            assert "name" in sourcedata[0]
+            assert "relative_path" in sourcedata[0]
+        assert "host_vars" in parserdata
         for hostname, contents in parserdata["host_vars"].items():
-            assert("host_1" in hostname)
-            assert("position" in contents)
-            assert("relative_path" in contents["position"])
+            assert "host_1" in hostname
+            assert "position" in contents
+            assert "relative_path" in contents["position"]

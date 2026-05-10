@@ -1,11 +1,10 @@
+from typing import Any
 import yaml
 
 
-class DocGenYaml:
-    @staticmethod
-    def load(data):
-        def vault_constructor(loader, node):
-            # Do nothing, do not decrypt
-            return "secret"
-        yaml.SafeLoader.add_constructor("!vault", vault_constructor)
-        return yaml.load(data, Loader=yaml.SafeLoader)
+def load_yaml(data: str) -> Any:
+    def vault_constructor(loader: yaml.SafeLoader, node: yaml.Node) -> str:
+        return "secret"
+
+    yaml.SafeLoader.add_constructor("!vault", vault_constructor)
+    return yaml.load(data, Loader=yaml.SafeLoader)
