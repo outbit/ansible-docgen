@@ -1,0 +1,9 @@
+---
+- name: configure nginx
+  template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf
+
+- name: start nginx
+  service: name=nginx state=started enabled=yes
+
+- include_role:
+    name: advanced

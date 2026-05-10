@@ -94,7 +94,7 @@ options:
 ## Development
 
 ```shell
-git clone https://github.com/starboarder2001/ansible-docgen
+git clone https://github.com/outbit/ansible-docgen
 cd ansible-docgen
 python -m venv .venv
 source .venv/bin/activate
