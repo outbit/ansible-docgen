@@ -15,6 +15,12 @@ Generate documentation from annotated Ansible playbooks and roles.
 pip install ansible-docgen
 ```
 
+Or via Homebrew:
+
+```shell
+brew install outbit/tap/ansible-docgen
+```
+
 ## Usage
 
 ### 1. Annotate your playbooks and roles
