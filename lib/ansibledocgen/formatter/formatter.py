@@ -1,4 +1,5 @@
 from pathlib import Path
+
 from jinja2 import Template
 
 
@@ -20,9 +21,11 @@ class Formatter:
         self.paths = paths
         self.project = project
         self.params = params
-        self.render_files: dict[str, dict[str, str]] = dict(
-            playbook=dict(), roles=dict(), host=dict()
-        )
+        self.render_files: dict[str, dict[str, str]] = {
+            "playbook": {},
+            "roles": {},
+            "host": {},
+        }
         self.templates_dir = Path(__file__).parent / "templates"
         self.templates_files = {
             "playbook": f"{style}_playbook.j2",
@@ -36,7 +39,7 @@ class Formatter:
         self._make_host_vars()
 
     def write_files(self, filename: str = "README") -> None:
-        for type_, content in self.render_files.items():
+        for content in self.render_files.values():
             for path_content, render_file in content.items():
                 path_obj = Path(path_content)
                 readme_top = path_obj / "README-TOP.md"

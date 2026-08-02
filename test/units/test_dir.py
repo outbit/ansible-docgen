@@ -1,6 +1,7 @@
 import os
-from ansibledocgen.parser.dir import DirParser
 from pathlib import Path
+
+from ansibledocgen.parser.dir import DirParser
 
 INTEGRATION = Path(__file__).parent.parent / "integration"
 
@@ -12,11 +13,11 @@ def test_parserdata():
     parserdata = dirparser.get_parserdata()
 
     assert "playbooks" in parserdata
-    for folder_content, sourcedata in parserdata["playbooks"].items():
+    for sourcedata in parserdata["playbooks"].values():
         assert "name" in sourcedata[0]
         assert "relative_path" in sourcedata[0]
     assert "roles" in parserdata
-    for folder_content, sourcedata in parserdata["roles"].items():
+    for sourcedata in parserdata["roles"].values():
         assert "name" in sourcedata[0]
         assert "relative_path" in sourcedata[0]
     assert "host_vars" in parserdata

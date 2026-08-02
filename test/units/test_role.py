@@ -1,4 +1,5 @@
 from pathlib import Path
+
 from ansibledocgen.parser.role import RoleParser
 
 INTEGRATION = Path(__file__).parent.parent / "integration"

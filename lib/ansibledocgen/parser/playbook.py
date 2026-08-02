@@ -1,9 +1,10 @@
 """Playbook Module"""
 
+import re
 from pathlib import Path
 from typing import Any
+
 from ansibledocgen.core.docgenyaml import load_yaml
-import re
 
 _INCLUDE_KEYS = ("include", "include_tasks", "import_tasks")
 

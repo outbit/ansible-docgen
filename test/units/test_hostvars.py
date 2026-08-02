@@ -1,4 +1,5 @@
 from pathlib import Path
+
 from ansibledocgen.parser.hostvars import HostVarsParser
 
 INTEGRATION = Path(__file__).parent.parent / "integration"

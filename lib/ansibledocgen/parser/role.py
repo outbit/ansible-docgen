@@ -1,6 +1,7 @@
 """Role Parser Module"""
 
 from pathlib import Path
+
 from ansibledocgen.parser.playbook import PlaybookParser
 
 

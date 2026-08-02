@@ -1,8 +1,8 @@
 """Ansible Config Module"""
 
-from pathlib import Path
 import os
 import re
+from pathlib import Path
 
 
 class AnsibleCfg:

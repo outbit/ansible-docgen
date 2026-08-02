@@ -1,9 +1,9 @@
 """DirParser Module"""
 
 from ansibledocgen.parser.ansiblecfg import AnsibleCfg
+from ansibledocgen.parser.hostvars import HostVarsParser
 from ansibledocgen.parser.playbook import PlaybookParser
 from ansibledocgen.parser.role import RoleParser
-from ansibledocgen.parser.hostvars import HostVarsParser
 
 
 class DirParser:
