@@ -1,4 +1,5 @@
 import sys
+
 from ansibledocgen.cli import Cli
 
 

@@ -1,11 +1,12 @@
 """Command Line Interface Module"""
 
 import argparse
-import sys
 import os
-from ansibledocgen.parser.dir import DirParser
-from ansibledocgen.formatter.formatter import Formatter
+import sys
+
 from ansibledocgen import __version__
+from ansibledocgen.formatter.formatter import Formatter
+from ansibledocgen.parser.dir import DirParser
 
 
 def main() -> None:

@@ -1,8 +1,9 @@
 """Host Vars Parser Module"""
 
-from pathlib import Path
-from ansibledocgen.core.docgenyaml import load_yaml
 import re
+from pathlib import Path
+
+from ansibledocgen.core.docgenyaml import load_yaml
 
 
 class HostVarsParser:

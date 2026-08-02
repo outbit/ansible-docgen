@@ -1,6 +1,7 @@
 import os
 import shutil
 from pathlib import Path
+
 from ansibledocgen.parser.playbook import PlaybookParser
 
 INTEGRATION = Path(__file__).parent.parent / "integration"

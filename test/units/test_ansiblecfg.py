@@ -1,4 +1,5 @@
 import os
+
 from ansibledocgen.parser.ansiblecfg import AnsibleCfg
 
 
