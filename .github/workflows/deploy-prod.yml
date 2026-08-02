@@ -32,3 +32,28 @@ jobs:
 
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
+
+  homebrew:
+    needs: deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Extract version
+        id: extract-version
+        run: echo "version=${GITHUB_REF#refs/tags/v}" >> "$GITHUB_OUTPUT"
+
+      - name: Bump Homebrew formula
+        uses: mislav/bump-homebrew-formula-action@v4
+        with:
+          formula-name: ansible-docgen
+          homebrew-tap: outbit/homebrew-tap
+          create-pullrequest: true
+          download-url: https://files.pythonhosted.org/packages/source/a/ansible-docgen/ansible_docgen-${{ steps.extract-version.outputs.version }}.tar.gz
+          commit-message: |
+            ansible-docgen ${{ steps.extract-version.outputs.version }}
+
+            Created by https://github.com/mislav/bump-homebrew-formula-action
+        env:
+          COMMITTER_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
